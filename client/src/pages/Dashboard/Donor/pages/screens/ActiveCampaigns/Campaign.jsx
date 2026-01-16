@@ -13,7 +13,7 @@ const Campaign = ({ campaigns }) => {
                         let percentage = (raised / goal) * 100
                         return (
                             <Col key={campaign._id} lg={8} md={12} sm={24} xs={24}>
-                                <div onClick={() => navigate(`/dashboard/active-campaigns/${campaign._id}`)} className="border cursor-pointer border-gray-400 rounded-2xl hover:shadow-lg transition-300 hover:shadow-gray-400">
+                                <div onClick={() => navigate(`/dashboard/active-campaigns/${campaign._id}`)} className="border cursor-pointer border-gray-400 rounded-2xl hover:shadow-lg transition-300 hover:shadow-gray-400 h-full">
                                     <div className="">
                                         <img src={campaign.image[0]} className='w-full mx-auto rounded-t-2xl object-cover h-[250px]' alt="" />
                                     </div>
@@ -33,7 +33,6 @@ const Campaign = ({ campaigns }) => {
                                             </div>
                                         </div>
                                         <div className="px-3">
-
                                             <button className="btn-primary">Donate</button>
                                         </div>
                                     </div>
@@ -43,7 +42,7 @@ const Campaign = ({ campaigns }) => {
                     })
                 }
             </Row>
-        </div>
+        </div >
     )
 }
 

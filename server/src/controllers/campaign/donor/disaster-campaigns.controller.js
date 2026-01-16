@@ -3,7 +3,10 @@ const Campaign = require("../../../models/campaign/campaign.model");
 
 const disasterCampaigns = async (req, res) => {
   try {
-    const campaigns = await Campaign.find({ category: "disaster" });
+    const campaigns = await Campaign.find({
+      category: "disaster",
+      status: "active",
+    });
     res.status(200).json(campaigns);
   } catch (error) {
     console.log(error);

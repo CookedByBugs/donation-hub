@@ -3,7 +3,10 @@ const Campaign = require("../../../models/campaign/campaign.model");
 
 const educationCampaigns = async (req, res) => {
   try {
-    const campaigns = await Campaign.find({ category: "education" });
+    const campaigns = await Campaign.find({
+      category: "education",
+      status: "active",
+    });
     res.status(200).json(campaigns);
   } catch (error) {
     console.log(error);

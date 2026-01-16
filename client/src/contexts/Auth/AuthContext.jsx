@@ -6,9 +6,11 @@ import React, {
   useState,
 } from "react";
 import axios from "axios";
+import { Loading3QuartersOutlined as LoadingIcon } from "@ant-design/icons"
 const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [state, setState] = useState({ isAuth: false, user: {} });
+  const [session, setSession] = useState({});
   const [isAppLoading, setIsAppLoading] = useState(true);
   const fetchProfile = useCallback(async () => {
     const token = localStorage.getItem("authToken");
@@ -27,6 +29,7 @@ const AuthProvider = ({ children }) => {
         }
       );
       setState({ isAuth: true, user: res.data.user });
+      setSession(res.data.session);
     } catch (err) {
       if (err?.response?.status === 401 || err?.response?.status === 403) {
         localStorage.removeItem("authToken");
@@ -44,9 +47,19 @@ const AuthProvider = ({ children }) => {
     fetchProfile();
   }, [fetchProfile]);
 
-  if (isAppLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (session.exp < Date.now()) {
+      handleLogout();
+    }
+  }, [])
+
+  if (isAppLoading) return <div className="bg-primary flex justify-center items-center h-screen">
+    <div className="animate-spin">
+      <LoadingIcon className="text-5xl !text-white" />
+    </div>
+  </div>;
   return (
-    <AuthContext.Provider value={{ fetchProfile, ...state, handleLogout }}>
+    <AuthContext.Provider value={{ fetchProfile, ...state, handleLogout, session }}>
       {children}
     </AuthContext.Provider>
   );
