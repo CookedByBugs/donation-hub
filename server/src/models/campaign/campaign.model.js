@@ -21,7 +21,7 @@ const campaignSchema = new mongoose.Schema(
     // ngo: { type: String, required: true },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Campaign = mongoose.model("Campaign", campaignSchema);

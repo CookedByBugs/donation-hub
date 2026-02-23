@@ -26,22 +26,20 @@ const AddCampaign = () => {
     e.preventDefault();
     let { title, goalAmount, category, endDate, description } = state;
 
+    if (!title.trim()) return message.error("Title is required");
+    if (!goalAmount.trim()) return message.error("Goal Amount is required");
+    if (!category.trim()) return message.error("Category is required");
+    if (!endDate.trim()) return message.error("End Date is required");
+    if (!description.trim()) return message.error("Description is required");
+    if (fileList.length > 5) return message.error("Maximum 5 images are allowed");
+    if (description.length > 1200) {
+      return message.error("Description is too long");
+    }
     title = title.trim();
     goalAmount = goalAmount.trim();
     category = category.trim();
     endDate = endDate.trim();
     description = description.trim();
-
-    if (
-      !title ||
-      !goalAmount ||
-      !category ||
-      !endDate ||
-      fileList.length === 0 ||
-      !description
-    ) {
-      return message.error("All fields are required");
-    }
 
     const formData = new FormData();
     formData.append("title", title);
@@ -55,6 +53,7 @@ const AddCampaign = () => {
       }
     });
     try {
+      console.log("IMG DATA", fileList);
       setIsProcessing(true);
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/campaign/create`,
@@ -147,7 +146,7 @@ const AddCampaign = () => {
               </Form.Item>
             </Col>
             <Col lg={24} md={24} sm={24} xs={24}>
-              <Form.Item label="Description" className="editor-box">
+              <Form.Item label={<p className='flex items-center gap-2'>Description <span className={` ${state.description.length > 1200 ? 'text-red-500' : 'text-green-500'}`}>{state.description.length}/1200</span></p>} className="editor-box">
                 <ReactQuill
                   onChange={(val) =>
                     setState((s) => ({ ...s, description: val }))

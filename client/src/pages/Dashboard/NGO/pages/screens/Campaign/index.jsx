@@ -74,7 +74,8 @@ const Campaign = () => {
     if (!category) return message.error("Category is required");
     if (!endDate) return message.error("End Date is required");
     if (!description) return message.error("Description is required");
-    console.log("Image list length", imageList.length);
+    if (description.length > 1200) return message.error("Description is too long");
+    if (imageList.length + file.length > 5) return message.error("Maximum 5 images are allowed");
     if (imageList.length === 0) {
       if (file.length === 0) {
         return message.error("At least one image is required");
@@ -267,10 +268,12 @@ const Campaign = () => {
             </Col>
 
             <Col span={24}>
-              <Form.Item label="Description">
+              <Form.Item label={<p className='flex items-center gap-2'>Description <span className={` ${state.description.length > 1200 ? 'text-red-500' : 'text-green-500'}`}>{state.description.length}/1200</span></p>}>
                 <ReactQuill
-                  onChange={(val) =>
+                  onChange={(val) => {
+                    console.log(val)
                     setState((s) => ({ ...s, description: val }))
+                  }
                   }
                   modules={{
                     toolbar: [

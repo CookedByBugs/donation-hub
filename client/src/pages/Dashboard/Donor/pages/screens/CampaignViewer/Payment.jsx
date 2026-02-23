@@ -34,7 +34,7 @@ const Payment = ({ campaign }) => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label className='mt-2' htmlFor="expiryDate">Expiry Date</label>
-                    <input onChange={handleChange} className='input-field !py-3' placeholder='MM/YY' type="text" name="expiryDate" id="expiryDate" maxLength="5" />
+                    <input onChange={handleChange} className='input-field !py-3' placeholder='MM/YY' value={state.expiryDate} type="text" name="expiryDate" id="expiryDate" maxLength="5" />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label className='mt-2' htmlFor="cvv">CVV</label>
@@ -42,7 +42,7 @@ const Payment = ({ campaign }) => {
                 </div>
                 <div className='text-center'>
                     <button onClick={handleSubmit} className="mt-2 btn-primary !py-3">Pay Now</button>
-                    <p className='text-sm text-gray-600'>Your card details are secure and protected by Stripe</p>
+                    <p className='text-sm mt-2 text-gray-600'>Your card details are secure and protected by Stripe</p>
                 </div>
             </form>
         </div>
