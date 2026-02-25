@@ -1,7 +1,10 @@
 const Campaign = require("../../../models/campaign/campaign.model");
 const getSingleController = async (req, res) => {
   try {
-    const campaign = await Campaign.findById(req.params.id);
+    const campaign = await Campaign.findById(req.params.id).populate(
+      "createdBy",
+      "firstName lastName NGO email",
+    );
     if (!campaign) {
       return res.status(404).json({ msg: "Campaign not found" });
     }

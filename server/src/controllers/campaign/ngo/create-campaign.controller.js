@@ -3,9 +3,6 @@ const fs = require("fs");
 const { upload } = require("../../../utils/cloudinary/cloudinary");
 const createController = async (req, res) => {
   try {
-    console.log("Files received:", req.files);
-    console.log("Body received:", req.body);
-
     if (!req.user || (!req.user._id && !req.user.id)) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
@@ -26,7 +23,7 @@ const createController = async (req, res) => {
         } finally {
           fs.unlinkSync(file.path);
         }
-      })
+      }),
     );
 
     const { title, goalAmount, category, endDate, description } = req.body;

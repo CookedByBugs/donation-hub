@@ -3,21 +3,44 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/user/user.model");
-
+const fs = require("fs");
+const { upload } = require("../../utils/cloudinary/cloudinary");
 //Register Controller
 const registerController = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, role } = req.body;
+    let profileImage = null;
+    const { firstName, lastName, email, password, role, NGO } = req.body;
     if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
+    if (role === "ngo" && !NGO) {
+      return res.status(400).json({ message: "NGO name is required" });
+    }
+    if (!req.file) {
+      return res.status(400).json({ message: "Profile image is required" });
+    }
+    await upload(req.file.path, {
+      folder: "user",
+    })
+      .then((result) => {
+        profileImage = result.secure_url;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        fs.unlinkSync(req.file.path);
+      });
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = new User({
       firstName,
       lastName,
       email,
       password: hashedPassword,
       role: role || "donor",
+      NGO: NGO || null,
+      profileImage,
     });
     await user.save();
     return res
@@ -36,7 +59,8 @@ const registerController = async (req, res) => {
 const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ message: "All fields are required" });
+    if (!email || !password)
+      return res.status(400).json({ message: "All fields are required" });
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Form, Col, Row, Divider, message, Select } from "antd";
+import { Form, Col, Row, Divider, message, Select, Upload } from "antd";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { LockFilled, UserOutlined } from "@ant-design/icons";
+import { LockFilled, PlusOutlined, UserOutlined } from "@ant-design/icons";
 const Register = () => {
   const navigate = useNavigate();
   const initState = {
@@ -12,9 +12,11 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    NGO: "",
   };
   const [state, setState] = useState(initState);
   const [role, setRole] = useState("");
+  const [image, setImage] = useState(null);
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -42,13 +44,22 @@ const Register = () => {
     if (!role) {
       return message.error("Please select role");
     }
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      role,
-    };
+    if (role === "ngo" && !state.NGO) {
+      return message.error("Please enter NGO name");
+    }
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("role", role);
+    if (role === "ngo") {
+      formData.append("NGO", state.NGO);
+    }
+    if (image) {
+      formData.append("profileImage", image);
+    }
+
     console.log("formData", formData);
     await axios
       .post(`${import.meta.env.VITE_API_URL}/api/user/register`, formData)
@@ -150,6 +161,35 @@ const Register = () => {
                           <Select.Option value="donor">Donor</Select.Option>
                           <Select.Option value="ngo">NGO</Select.Option>
                         </Select>
+                      </Form.Item>
+                    </Col>
+                    {
+                      role === "ngo" && <Col span={24}>
+                        <Form.Item label="NGO name" className="text-center">
+                          <input
+                            type="text"
+                            name="NGO"
+                            onChange={handleChange}
+                            className="auth-field transition-150"
+                          />
+                        </Form.Item>
+                      </Col>
+                    }
+                    <Col span={24}>
+                      <Form.Item
+                        label="Profile Image">
+                        <Upload
+                          beforeUpload={(file) => {
+                            setImage(file)
+                            return false
+                          }}
+                          maxCount={1}
+                          onChange={(e) => setImage(e.file)} className="p-3">
+                          <p className="flex items-center gap-2 shadow border rounded-lg p-2">
+                            <PlusOutlined className="text-4xl" />
+                            Upload Image
+                          </p>
+                        </Upload>
                       </Form.Item>
                     </Col>
                     <Col span={24}>

@@ -6,7 +6,9 @@ const otherCampaigns = async (req, res) => {
     const campaigns = await Campaign.find({
       category: "other",
       status: "active",
-    });
+    })
+      .sort({ createdAt: -1 })
+      .populate("createdBy");
     res.status(200).json(campaigns);
   } catch (error) {
     console.log(error);

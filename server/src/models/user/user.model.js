@@ -7,8 +7,10 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ["donor", "ngo"], default: "donor" },
+    profileImage: { type: String, default: null },
+    NGO: { type: String, default: null },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const User = mongoose.model("User", userSchema);
