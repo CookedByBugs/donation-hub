@@ -47,6 +47,9 @@ const Register = () => {
     if (role === "ngo" && !state.NGO) {
       return message.error("Please enter NGO name");
     }
+    if (!image) {
+      return message.error("Please upload profile image");
+    }
     const formData = new FormData();
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
@@ -177,6 +180,7 @@ const Register = () => {
                     }
                     <Col span={24}>
                       <Form.Item
+                        required
                         label="Profile Image">
                         <Upload
                           beforeUpload={(file) => {

@@ -3,7 +3,7 @@ const getSingleController = async (req, res) => {
   try {
     const campaign = await Campaign.findById(req.params.id).populate(
       "createdBy",
-      "firstName lastName NGO email",
+      "firstName lastName NGO email profileImage",
     );
     if (!campaign) {
       return res.status(404).json({ msg: "Campaign not found" });

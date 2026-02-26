@@ -13,6 +13,7 @@ const Index = () => {
       <Route path="campaign-management/add-campaign" element={<AddCampaign />} />
       <Route path="campaign-management/:id" element={<Campaign />} />
       <Route path="analytics-reports" element={<Analytics />} />
+      <Route path="profile" element={<>Profile</>} />
     </Routes>
   );
 };
