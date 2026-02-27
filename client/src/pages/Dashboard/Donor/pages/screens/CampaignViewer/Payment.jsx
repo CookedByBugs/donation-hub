@@ -105,6 +105,14 @@ const Payment = ({ campaign }) => {
           </p>
         </div>
       </form>
+      <div className="p-3 bg-white border border-blue-700 rounded-xl">
+        <p className="font-semibold text-blue-900 mb-2">Secure & Trusted</p>
+
+        <p className="text-sm text-blue-700 ">
+          Your donation is secure and will be used exclusively for this
+          campaign. All transactions are encrypted and protected.
+        </p>
+      </div>
     </div>
   );
 };

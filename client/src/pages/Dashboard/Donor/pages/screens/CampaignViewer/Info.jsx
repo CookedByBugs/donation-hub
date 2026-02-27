@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { MoreOutlined } from "@ant-design/icons";
+import { CloseOutlined, MoreOutlined } from "@ant-design/icons";
 const Info = ({ campaign }) => {
-  console.log(campaign);
   const [showMore, setShowMore] = useState(false);
   return (
     <div>
@@ -76,7 +75,7 @@ const Info = ({ campaign }) => {
           </div>
         </div>
       </div>
-      <div className="p-3 rounded-2xl bg-white shadow-xl">
+      <div className="p-3 rounded-2xl bg-white shadow-xl border">
         <h3 className="text-2xl font-semibold">Campaign Organizer</h3>
         <div className="p-3 relative">
           <div className="flex items-center gap-2">
@@ -91,10 +90,42 @@ const Info = ({ campaign }) => {
                 Posted by:{" "}
                 {`${campaign?.createdBy?.firstName} ${campaign?.createdBy?.lastName}`}
               </p>
+              <p className="text-gray-500">
+                Date posted:{" "}
+                {new Date(campaign.createdAt).toLocaleDateString("en-GB")}
+              </p>
             </div>
           </div>
           <div className="absolute top-5 right-5">
-            <MoreOutlined className="text-2xl rotate-90" />
+            <div className="relative">
+              {showMore ? (
+                <CloseOutlined
+                  className="text-2xl rotate-90"
+                  onClick={() => setShowMore(false)}
+                />
+              ) : (
+                <MoreOutlined
+                  className="text-2xl rotate-90"
+                  onClick={() => setShowMore(true)}
+                />
+              )}
+              <div
+                className={`absolute w-[200px] top-5 right-0 bg-white shadow-xl rounded-xl overflow-hidden transition-150 ${showMore ? "max-h-44" : "max-h-0"}`}
+              >
+                <div className="p-5">
+                  <p className="hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
+                    Contact Organizer
+                  </p>
+                  <p className="hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
+                    Share Campaign
+                  </p>
+                  <hr />
+                  <p className="hover:bg-gray-100 text-danger p-2 rounded-lg cursor-pointer">
+                    Report Campaign
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
