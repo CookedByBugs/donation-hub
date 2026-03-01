@@ -1,14 +1,15 @@
 import { useAuthContext } from "@/contexts/Auth/AuthContext";
 import { Image, message } from "antd";
 import React, { useEffect, useState } from "react";
+import ProfileForm from "./Form";
 
 const Profile = () => {
-  const [isEdit, setIsEdit] = useState(false);
   const { user } = useAuthContext();
-  const handleEdit = () => {
-    setIsEdit(!isEdit);
-    message.info(isEdit ? "Editing Profile" : "Profile Updated");
+
+  const handleImageUpdate = async () => {
+    message.info("Image updated");
   };
+
   console.log(user);
   return (
     <div className="md:mt-40 mt-30 md:max-w-[80%] max-w-[95%] w-full mx-auto">
@@ -33,10 +34,16 @@ const Profile = () => {
           </div>
         </div>
         <div className="md:text-center md:w-auto w-full">
-          <button onClick={handleEdit} className="btn-primary md:px-5 px-10!">
-            {isEdit ? "Save" : "Edit"}
+          <button
+            onClick={handleImageUpdate}
+            className="btn-primary md:px-5 px-10!"
+          >
+            Change Profile picture
           </button>
         </div>
+      </div>
+      <div>
+        <ProfileForm />
       </div>
     </div>
   );
