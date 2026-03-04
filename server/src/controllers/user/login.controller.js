@@ -1,6 +1,5 @@
 const User = require("../../models/user/user.model");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken");
 
 const loginController = async (req, res) => {
@@ -19,7 +18,7 @@ const loginController = async (req, res) => {
         });
         return res
             .status(200)
-            .json({ message: "Login successful", token, status: "success" });
+            .json({ message: "Login successful", token, status: "success", user });
     } catch (error) {
         console.log(error);
         return res

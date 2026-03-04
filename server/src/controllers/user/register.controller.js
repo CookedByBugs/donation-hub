@@ -1,8 +1,7 @@
 const User = require("../../models/user/user.model");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
-const mongoose = require("mongoose");
-const upload = require("../../utils/cloudinary/cloudinary");
+const { upload } = require("../../utils/cloudinary/cloudinary");
 
 const registerController = async (req, res) => {
     try {

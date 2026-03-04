@@ -111,7 +111,7 @@ const Profile = () => {
             </div>
           </div>
         </Modal>
-        <div className="md:text-center md:w-auto w-full">
+        <div className="text-center md:w-auto w-full">
           <button
             onClick={() => setIsModalOpen(true)}
             className="btn-primary md:px-5 px-10!"
