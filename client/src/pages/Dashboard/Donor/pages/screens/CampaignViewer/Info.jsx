@@ -45,7 +45,7 @@ const Info = ({ campaign }) => {
         </div>
       </div>
       <div className="my-5">
-        <div className="bg-white rounded-2xl shadow-xl p-5">
+        <div className="bg-white rounded-2xl shadow-xl p-10">
           <h3 className="text-2xl font-semibold ">Campaign Timeline</h3>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <div className="bg-orange-500/20 p-5 rounded-xl">

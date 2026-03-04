@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Payment = ({ campaign }) => {
   const [state, setState] = useState({
     holder: "",
+    email: "",
     cardNumber: "",
     amount: "",
     expiryDate: "",
@@ -23,7 +24,7 @@ const Payment = ({ campaign }) => {
             Secure payment powered by Stripe
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-3 mt-2">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-2">
           <div className="flex flex-col gap-2">
             <label className="" htmlFor="holder">
               Card Holder Name
@@ -35,6 +36,17 @@ const Payment = ({ campaign }) => {
               type="text"
               name="holder"
               id="holder"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email">Email</label>
+            <input
+              onChange={handleChange}
+              className="input-field !py-3"
+              placeholder="Email"
+              type="email"
+              name="email"
+              id="email"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -50,9 +62,6 @@ const Payment = ({ campaign }) => {
               id="cardNumber"
             />
           </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-3 mt-2">
           <div className="flex flex-col gap-2">
             <label htmlFor="amount">Amount</label>
             <input
@@ -64,6 +73,8 @@ const Payment = ({ campaign }) => {
               id="amount"
             />
           </div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-3 mt-2">
           <div className="flex flex-col gap-2">
             <label className="" htmlFor="expiryDate">
               Expiry Date
@@ -79,9 +90,7 @@ const Payment = ({ campaign }) => {
               maxLength="5"
             />
           </div>
-        </div>
-        <div className="grid grid-cols-2 mt-2">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             <label className="" htmlFor="cvv">
               CVV
             </label>
