@@ -27,7 +27,6 @@ const updateController = async (req, res) => {
           const result = await upload(file.path, {
             folder: "campaign",
           });
-          console.log(result);
           return result.secure_url;
         } catch (error) {
           console.log(error);

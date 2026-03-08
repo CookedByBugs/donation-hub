@@ -5,7 +5,7 @@ const User = require("../../../models/user/user.model");
 const healthCampaigns = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    console.log(user);
+    // console.log(user);
     const campaigns = await Campaign.find({
       category: "health",
       status: "active",

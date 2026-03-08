@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { message } from "antd";
 
 const Payment = ({ campaign }) => {
   const stripe = useStripe();
@@ -17,11 +18,15 @@ const Payment = ({ campaign }) => {
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
+    console.log("goal", campaign.goalAmount);
+    console.log("ongoing", state.amount);
+    if (campaign.goalAmount - campaign.raisedAmount < Number(state.amount)) {
+      return message.warning("Amount is greater than campaign goal amount");
+    }
 
     try {
       setLoading(true);
