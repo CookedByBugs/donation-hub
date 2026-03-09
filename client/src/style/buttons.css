@@ -1,27 +1,34 @@
+/* NAV LINK */
 .nav-link {
   @apply cursor-pointer transition-all duration-150 p-3 font-semibold text-white/80 hover:text-white;
 }
 
+/* BRAND BUTTON (navbar / main brand actions) */
 .btn-brand {
-  @apply cursor-pointer transition-all duration-150 bg-[#1230AE] text-white px-5 py-2 select-none rounded hover:brightness-80;
+  @apply cursor-pointer transition-all duration-150 bg-[#0F5132] text-white px-5 py-2 select-none rounded hover:bg-[#14532D];
 }
 
+/* PRIMARY BUTTON (Donate / main actions) */
 .btn-primary {
-  @apply cursor-pointer transition-all duration-150 bg-[#6C48C5] text-white px-5 py-2 select-none rounded hover:brightness-80;
+  @apply cursor-pointer transition-all duration-150 bg-[#166534] text-white px-5 py-2 select-none rounded hover:bg-[#14532D];
 }
 
+/* SECONDARY BUTTON (Cancel / secondary actions) */
 .btn-secondary {
-  @apply cursor-pointer transition-all duration-150 bg-[#FEC5F6] text-black px-5 py-2 select-none rounded hover:brightness-80;
+  @apply cursor-pointer transition-all duration-150 bg-[#D9CFC7] text-[#0F172A] px-5 py-2 select-none rounded hover:bg-[#C9B59C];
 }
 
+/* DANGER BUTTON (errors / destructive actions) */
 .btn-danger {
-  @apply cursor-pointer transition-all duration-150 bg-[#DC3545] text-white px-5 py-2 select-none rounded hover:brightness-80;
+  @apply cursor-pointer transition-all duration-150 bg-[#DC2626] text-white px-5 py-2 select-none rounded hover:bg-[#B91C1C];
 }
 
+/* SUCCESS BUTTON (confirmation / success) */
 .btn-success {
-  @apply cursor-pointer transition-all duration-150 bg-[#28A745] text-white px-5 py-2 select-none rounded hover:brightness-80;
+  @apply cursor-pointer transition-all duration-150 bg-[#166534] text-white px-5 py-2 select-none rounded hover:bg-[#14532D];
 }
 
+/* BETA / EXPERIMENTAL BUTTON */
 .btn-beta {
-  @apply px-5 py-2 rounded bg-red-500 text-white hover:brightness-80;
+  @apply px-5 py-2 rounded bg-[#64748B] text-white hover:bg-[#475569];
 }

@@ -1,15 +1,26 @@
+/* BORDERS */
+
+/* Brand elements */
 .border-brand {
-@apply border-[#1230AE] border-1 
+  @apply border-[#0F5132] border;
 }
+
+/* Primary / action elements */
 .border-primary {
-@apply border-[#FEC5F6] border-1 
+  @apply border-[#166534] border;
 }
+
+/* Sections / cards */
 .border-section {
-@apply border-[#FFF7F7] border-1    
+  @apply border-[#EFE9E3] border;
 }
+
+/* Footer */
 .border-foot {
-@apply border-[#212529] border-1    
+  @apply border-[#0F172A] border;
 }
+
+/* Success states */
 .border-success {
-@apply border-[#28A745] !border-1    
+  @apply border-[#166534] border;
 }

@@ -1,6 +1,7 @@
 .sider {
-  @apply min-h-screen fixed left-0 top-0 z-50 text-white font-bold text-xl;
+  @apply min-h-screen fixed left-0 top-0 z-50 bg-[#0F5132] text-white font-bold text-xl;
 }
-.bg-secondary-2{
-  @apply !bg-[#FEC5F6]/80;
+
+.bg-secondary-2 {
+  @apply !bg-[#EFE9E3]/80;
 }

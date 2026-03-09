@@ -1,76 +1,70 @@
+/* BACKGROUNDS */
 .bg-brand {
-  @apply !bg-[#1230AE];
+  @apply !bg-[#0F5132]; /* Deep muted green for navbar, headers */
 }
 
 .bg-primary {
-  @apply !bg-[#6C48C5];
+  @apply !bg-[#166534]; /* Softer primary buttons */
 }
 
 .bg-section {
-  @apply !bg-[#FFF7F7];
+  @apply !bg-[#F9F8F6]; /* Soft warm background for page sections */
 }
 
 .bg-foot {
-  @apply !bg-[#212529];
+  @apply !bg-[#0F172A]; /* Dark footer */
 }
 
 .bg-success {
-  @apply !bg-[#28A745];
+  @apply !bg-[#166534]; /* Success messages */
 }
 
 .bg-danger {
-  @apply !bg-[#DC3545];
+  @apply !bg-[#DC2626]; /* Errors */
 }
 
 .bg-secondary {
-  @apply !bg-[#FEC5F6];
+  @apply !bg-[#D9CFC7]; /* Neutral secondary elements / cards */
 }
 
 .bg-light {
-  @apply !bg-[#F5F1DC];
+  @apply !bg-[#FFFFFF]; /* Main content background */
 }
 
+/* TEXT COLORS */
 .text-brand {
-  @apply !text-[#1230AE];
+  @apply !text-[#0F5132]; /* Brand text */
 }
 
 .text-primary {
-  @apply !text-[#6C48C5];
+  @apply !text-[#166534]; /* Links / action text */
 }
 
 .text-secondary {
-  @apply !text-[#FEC5F6];
+  @apply !text-[#64748B]; /* Muted text, gray */
 }
+
 .hover-text-primary {
-  @apply hover:text-[#6C48C5];
+  @apply hover:text-[#14532D]; /* Subtle hover for actions */
 }
 
 .text-section {
-  @apply !text-[#FFF7F7];
+  @apply !text-[#334155]; /* Dark gray for readability */
 }
 
 .text-foot {
-  @apply !text-[#212529];
+  @apply !text-[#F8FAFC]; /* Light text for dark footer */
 }
 
 .text-success {
-  @apply !text-[#28A745];
+  @apply !text-[#166534]; /* Success messages */
 }
 
 .text-danger {
-  @apply !text-[#DC3545];
+  @apply !text-[#DC2626]; /* Error messages */
 }
 
-.text-secondary {
-  @apply !text-[#FEC5F6];
-}
-
-.bg-light {
-  @apply !bg-[#F5F1DC];
-}
-
+/* HOVER / INTERACTION */
 .hover-bg-secondary {
-  @apply hover:bg-[#FEC5F6];
+  @apply hover:bg-[#EFE9E3]; /* Subtle hover for secondary elements */
 }
-
-/*C68FE6*/
