@@ -22,7 +22,8 @@ const Info = ({ campaign }) => {
         </div>
         <div className="my-5">
           <h3 className="font-semibold text-2xl my-2">
-            Progress {(campaign.raisedAmount / campaign.goalAmount) * 100}%
+            Progress{" "}
+            {Math.floor((campaign.raisedAmount / campaign.goalAmount) * 100)}%
           </h3>
           <div className="bg-gray-300 rounded-full h-4">
             <div
