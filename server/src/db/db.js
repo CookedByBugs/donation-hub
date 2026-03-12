@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+const dns = require("node:dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 
 const connectDB = async () => {
-  mongoose
+  await mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log("MongoDB connection error", err));
