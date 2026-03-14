@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import { Col, Row } from "antd";
 import Payment from "./Payment";
 import Info from "./Info";
 import Description from "./Description";
+import socket from "@/components/socket";
+
 const CampaignViewer = () => {
   const [campaign, setCampaign] = useState({});
   const [images, setImages] = useState([]);
@@ -27,9 +29,26 @@ const CampaignViewer = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchCampaign();
   }, [id]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Socket connected", socket.id);
+    });
+
+    socket.on("donation_recieved", (data) => {
+      console.log("Donation received", data);
+      fetchCampaign();
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("donation_recieved");
+    };
+  }, [fetchCampaign]);
   return (
     <div className="mt-30">
       <div className="my-10">
