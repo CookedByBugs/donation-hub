@@ -60,6 +60,7 @@ const Payment = ({ campaign }) => {
         console.log(result.error.message);
       } else if (result.paymentIntent.status === "succeeded") {
         console.log("Payment successful", result.paymentIntent);
+        message.success("Payment successful");
       }
     } catch (error) {
       console.error(error.message);

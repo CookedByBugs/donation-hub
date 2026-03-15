@@ -10,7 +10,7 @@ const campaignSchema = new mongoose.Schema(
       enum: ["education", "health", "disaster", "others"],
       required: true,
     },
-    endDate: { type: String, required: true },
+    endDate: { type: Date, required: true },
     image: [{ type: String }],
     description: { type: String, required: true },
     createdBy: {
@@ -19,7 +19,11 @@ const campaignSchema = new mongoose.Schema(
       required: true,
     },
     // ngo: { type: String, required: true },
-    status: { type: String, enum: ["active", "inactive"], default: "active" },
+    status: {
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
+    },
   },
   { timestamps: true },
 );

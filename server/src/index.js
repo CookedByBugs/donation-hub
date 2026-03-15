@@ -5,6 +5,7 @@ const routes = require("./routes/index");
 const { createServer } = require("node:http");
 const httpServer = createServer(app);
 const { Server } = require("socket.io");
+require("./utils/node-cron");
 
 const io = new Server(httpServer, {
   cors: {

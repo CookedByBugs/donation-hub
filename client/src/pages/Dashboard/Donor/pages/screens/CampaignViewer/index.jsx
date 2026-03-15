@@ -39,14 +39,20 @@ const CampaignViewer = () => {
       console.log("Socket connected", socket.id);
     });
 
-    socket.on("donation_recieved", (data) => {
+    socket.on("donation_received", (data) => {
       console.log("Donation received", data);
       fetchCampaign();
+    });
+    socket.on("campaign_completed", (data) => {
+      if (data === campaign._id) {
+        fetchCampaign();
+      }
     });
 
     return () => {
       socket.off("connect");
-      socket.off("donation_recieved");
+      socket.off("donation_received");
+      socket.off("campaign_completed");
     };
   }, [fetchCampaign]);
   return (

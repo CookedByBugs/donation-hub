@@ -5,8 +5,9 @@ const Donation = require("../../models/campaign/donation.model");
 const stripeWebhook = async (req, res) => {
   const io = req.app.get("io");
   const sig = req.headers["stripe-signature"];
+
   let event;
-  let paymentIntent;
+
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
@@ -19,29 +20,47 @@ const stripeWebhook = async (req, res) => {
   }
 
   if (event.type === "payment_intent.succeeded") {
-    paymentIntent = event.data.object;
+    const paymentIntent = event.data.object;
+
+    const amount = paymentIntent.amount / 100;
+    const campaignId = paymentIntent.metadata.campaignId;
+
     await Donation.create({
-      amount: paymentIntent.amount / 100,
+      amount,
       donorId: paymentIntent.metadata.donorId,
-      campaignId: paymentIntent.metadata.campaignId,
-      paymentIntentId: paymentIntent.id,
-      status: paymentIntent.status,
-    });
-    console.log("Emitting socket donation_recieved");
-    io.emit("donation_recieved", {
-      amount: paymentIntent.amount / 100,
-      donorId: paymentIntent.metadata.donorId,
-      campaignId: paymentIntent.metadata.campaignId,
+      campaignId,
       paymentIntentId: paymentIntent.id,
       status: paymentIntent.status,
     });
 
-    await Campaign.findByIdAndUpdate(paymentIntent.metadata.campaignId, {
-      $inc: { raisedAmount: paymentIntent.amount / 100 },
+    const campaign = await Campaign.findByIdAndUpdate(
+      campaignId,
+      { $inc: { raisedAmount: amount } },
+      { new: true },
+    );
+
+    if (
+      campaign.raisedAmount >= campaign.goalAmount &&
+      campaign.status === "active"
+    ) {
+      campaign.status = "inactive";
+      await campaign.save();
+
+      io.emit("campaign_completed", {
+        campaignId: campaign._id,
+      });
+    }
+
+    io.emit("donation_received", {
+      amount,
+      donorId: paymentIntent.metadata.donorId,
+      campaignId,
+      paymentIntentId: paymentIntent.id,
+      status: paymentIntent.status,
     });
   }
 
-  res.json({ recieved: true });
+  res.json({ received: true });
 };
 
 module.exports = { stripeWebhook };
