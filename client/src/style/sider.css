@@ -1,5 +1,5 @@
 .sider {
-  @apply min-h-screen fixed left-0 top-0 z-50 bg-[#0F5132] text-white font-bold text-xl;
+  @apply min-h-screen fixed left-0 top-0 z-50 bg-[#25d3c2] text-white font-bold text-xl;
 }
 
 .bg-secondary-2 {

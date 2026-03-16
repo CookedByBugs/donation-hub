@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <header className="p-3 bg-primary">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold text-white select-none">
+        <a href="#" className="text-2xl font-bold select-none">
           Donation Hub
         </a>
 
@@ -94,7 +94,7 @@ const Navbar = () => {
                 href="#"
                 onClick={() => {
                   setOpen(false);
-                  navigate("/dashboard")
+                  navigate("/dashboard");
                 }}
               >
                 Dashboard
