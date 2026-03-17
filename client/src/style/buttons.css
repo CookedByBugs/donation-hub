@@ -1,5 +1,6 @@
 .nav-link {
-  @apply cursor-pointer transition-all duration-150 p-3 font-semibold text-black/80 hover:text-black;
+  @apply cursor-pointer transition-all duration-150 p-3 font-semibold text-white/80 hover:text-white;
+  /* @apply cursor-pointer transition-all duration-150 p-3 font-semibold text-black/80 hover:text-black; */
 }
 
 .btn-nav {
@@ -7,11 +8,11 @@
 }
 
 .btn-primary {
-  @apply cursor-pointer transition-all duration-150 bg-[#25d3c2] text-white hover:text-black px-5 py-2 select-none rounded hover:bg-[#2cf9e5];
+  @apply cursor-pointer transition-all duration-150 bg-[#25d3c2] text-white px-5 py-2 select-none rounded hover:bg-[#2cf9e5];
 }
 
 .btn-secondary {
-  @apply cursor-pointer transition-all duration-150 bg-[#82fdf1] text-white px-5 py-2 select-none rounded hover:bg-[#64d7cc];
+  @apply cursor-pointer transition-all duration-150 bg-[#82fdf1] text-black px-5 py-2 select-none rounded hover:bg-[#64d7cc];
 }
 
 .btn-danger {

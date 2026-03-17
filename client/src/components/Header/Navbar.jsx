@@ -7,9 +7,9 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { isAuth, handleLogout } = useAuthContext();
   return (
-    <header className="p-3 bg-primary">
+    <header className="p-3 bg-primary ">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold select-none">
+        <a href="#" className="text-2xl text-white font-bold select-none">
           Donation Hub
         </a>
 

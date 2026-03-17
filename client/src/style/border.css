@@ -1,18 +1,18 @@
 /* BORDERS */
 
 /* Brand elements */
-.border-brand {
-  @apply border-[#0F5132] border;
+.border-nav {
+  @apply border-[#FBF8EF] border;
 }
 
 /* Primary / action elements */
 .border-primary {
-  @apply border-[#166534] border;
+  @apply border-[#25d3c2] border;
 }
 
 /* Sections / cards */
 .border-section {
-  @apply border-[#EFE9E3] border;
+  @apply border-[#FFB433] border;
 }
 
 /* Footer */

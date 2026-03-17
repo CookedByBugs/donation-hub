@@ -81,10 +81,10 @@ const Register = () => {
       });
   };
   return (
-    <div className="bg-light p-3 flex justify-center items-center min-h-screen">
+    <div className="bg-nav p-3 flex justify-center items-center min-h-screen">
       <div className="bg-white md:max-w-[70%] w-full mx-auto shadow-2xl py-10 px-5 rounded-2xl">
         <div className="flex items-center justify-center gap-3">
-          <h2 className="md:text-5xl text-3xl pb-5 text-brand font-semibold my-5">
+          <h2 className="md:text-5xl text-3xl pb-5 text-primary font-semibold my-5">
             Register <UserOutlined />
           </h2>
         </div>
@@ -166,8 +166,8 @@ const Register = () => {
                         </Select>
                       </Form.Item>
                     </Col>
-                    {
-                      role === "ngo" && <Col span={24}>
+                    {role === "ngo" && (
+                      <Col span={24}>
                         <Form.Item label="NGO name" className="text-center">
                           <input
                             type="text"
@@ -177,18 +177,18 @@ const Register = () => {
                           />
                         </Form.Item>
                       </Col>
-                    }
+                    )}
                     <Col span={24}>
-                      <Form.Item
-                        required
-                        label="Profile Image">
+                      <Form.Item required label="Profile Image">
                         <Upload
                           beforeUpload={(file) => {
-                            setImage(file)
-                            return false
+                            setImage(file);
+                            return false;
                           }}
                           maxCount={1}
-                          onChange={(e) => setImage(e.file)} className="p-3">
+                          onChange={(e) => setImage(e.file)}
+                          className="p-3"
+                        >
                           <p className="flex items-center gap-2 shadow border rounded-lg p-2">
                             <PlusOutlined className="text-4xl" />
                             Upload Image
@@ -205,7 +205,7 @@ const Register = () => {
                       <Form.Item className="text-center">
                         <button
                           onClick={handleSubmit}
-                          className="btn-brand transition-150"
+                          className="btn-primary transition-150"
                         >
                           Register <LockFilled />
                         </button>

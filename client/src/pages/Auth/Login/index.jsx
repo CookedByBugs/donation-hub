@@ -57,10 +57,10 @@ const Login = () => {
       });
   };
   return (
-    <div className="bg-light p-3 flex justify-center items-center min-h-screen">
+    <div className="bg-nav p-3 flex justify-center items-center min-h-screen">
       <div className="bg-white md:max-w-[70%] w-full mx-auto shadow-2xl py-10 px-5 rounded-2xl">
         <div className="flex justify-center items-center md:gap-3 gap-1">
-          <h2 className="md:text-5xl text-center text-3xl text-brand font-semibold my-5 ">
+          <h2 className="md:text-5xl text-center text-3xl text-primary font-semibold my-5 ">
             Login <UserOutlined />
           </h2>
         </div>
@@ -105,7 +105,7 @@ const Login = () => {
                   <Form.Item className="text-center">
                     <button
                       onClick={handleSubmit}
-                      className="btn-brand transition-150"
+                      className="btn-primary transition-150"
                     >
                       Login <LockFilled />
                     </button>

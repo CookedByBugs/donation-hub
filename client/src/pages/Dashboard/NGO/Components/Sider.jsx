@@ -28,13 +28,11 @@ const Sider = () => {
 
   return (
     <div
-      className={`sider z-50 transition-300 bg-primary ${!isOpen ? "w-0" : "md:w-[350px] w-[300px] p-3"
-        }`}
+      className={`sider z-50 transition-all duration-500 overflow-y-hidden bg-primary ${
+        !isOpen ? "w-0" : "md:w-[350px] w-[300px] p-3"
+      }`}
     >
-      <div
-        className={`flex justify-between flex-row-reverse items-center ${!isOpen ? "hidden" : ""
-          }`}
-      >
+      <div className={`flex justify-between flex-row-reverse items-center `}>
         <div
           className={`text-2xl cursor-pointer`}
           onClick={() => setIsOpen(!isOpen)}
@@ -46,12 +44,13 @@ const Sider = () => {
         </Link>
       </div>
       <hr className="my-4" />
-      <div className={`${!isOpen ? "hidden" : "block"}`}>
+      <div>
         {links.map((link) => (
           <Link key={link.label} to={link.to}>
             <div
-              className={`p-3 hover-bg-secondary hover:text-white ${location.pathname === link.to && "bg-secondary !text-white"
-                } rounded transition-150 border-primary my-2 flex items-center `}
+              className={`p-3 hover:bg-white/85 hover:text-black ${
+                location.pathname === link.to && "bg-white !text-black"
+              } rounded transition-150 border-primary my-2 flex items-center `}
             >
               <link.icons />
               <span className="ml-2">{link.label}</span>
