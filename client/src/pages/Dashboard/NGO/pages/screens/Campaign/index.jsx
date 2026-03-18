@@ -22,6 +22,12 @@ const Campaign = () => {
   const [file, setFile] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const getPlainText = (html) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    return temp.textContent || temp.innerText || "";
+  };
+
   const getCampaign = async () => {
     try {
       const res = await axios.get(
@@ -30,7 +36,7 @@ const Campaign = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-        }
+        },
       );
       setCampaign(res.data.campaign);
       setImageList(res.data.campaign.image);
@@ -38,7 +44,7 @@ const Campaign = () => {
         res.data.campaign.image.map((img) => ({
           uid: crypto.randomUUID(),
           preview: img,
-        }))
+        })),
       );
     } catch (error) {
       console.error(error);
@@ -74,8 +80,10 @@ const Campaign = () => {
     if (!category) return message.error("Category is required");
     if (!endDate) return message.error("End Date is required");
     if (!description) return message.error("Description is required");
-    if (description.length > 1200) return message.error("Description is too long");
-    if (imageList.length + file.length > 5) return message.error("Maximum 5 images are allowed");
+    if (getPlainText(description).length > 1200)
+      return message.error("Description is too long");
+    if (imageList.length + file.length > 5)
+      return message.error("Maximum 5 images are allowed");
     if (imageList.length === 0) {
       if (file.length === 0) {
         return message.error("At least one image is required");
@@ -108,7 +116,7 @@ const Campaign = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-        }
+        },
       );
       message.success("Campaign updated successfully");
       console.log(res.data);
@@ -217,7 +225,7 @@ const Campaign = () => {
                         <div
                           onClick={() => {
                             setImageList((prev) =>
-                              prev.filter((_, index) => index !== i)
+                              prev.filter((_, index) => index !== i),
                             );
                           }}
                           className="absolute top-2 right-2 bg-white/70 transition-150 hover:bg-white cursor-pointer z-10 rounded-full w-5 h-5 flex items-center justify-center"
@@ -246,7 +254,7 @@ const Campaign = () => {
                       <div
                         onClick={() => {
                           setFile((prev) =>
-                            prev.filter((_, index) => index !== i)
+                            prev.filter((_, index) => index !== i),
                           );
                         }}
                         className="absolute top-2 right-2 bg-white/70 transition-150 hover:bg-white cursor-pointer z-10 rounded-full w-5 h-5 flex items-center justify-center"
@@ -268,13 +276,23 @@ const Campaign = () => {
             </Col>
 
             <Col span={24}>
-              <Form.Item label={<p className='flex items-center gap-2'>Description <span className={` ${state.description.length > 1200 ? 'text-red-500' : 'text-green-500'}`}>{state.description.length}/1200</span></p>}>
+              <Form.Item
+                label={
+                  <p className="flex items-center gap-2">
+                    Description{" "}
+                    <span
+                      className={` ${getPlainText(state.description).length > 1200 ? "text-red-500" : "text-green-500"}`}
+                    >
+                      {getPlainText(state.description).length}/1200
+                    </span>
+                  </p>
+                }
+              >
                 <ReactQuill
                   onChange={(val) => {
-                    console.log(val)
-                    setState((s) => ({ ...s, description: val }))
-                  }
-                  }
+                    console.log(val);
+                    setState((s) => ({ ...s, description: val }));
+                  }}
                   modules={{
                     toolbar: [
                       ["bold", "italic", "underline", "strike", "blockquote"],

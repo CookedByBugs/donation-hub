@@ -22,6 +22,12 @@ const AddCampaign = () => {
     setState((s) => ({ ...s, [e.target.name]: e.target.value }));
   };
 
+  const getPlainText = (html) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    return temp.textContent || temp.innerText || "";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { title, goalAmount, category, endDate, description } = state;
@@ -31,8 +37,9 @@ const AddCampaign = () => {
     if (!category.trim()) return message.error("Category is required");
     if (!endDate.trim()) return message.error("End Date is required");
     if (!description.trim()) return message.error("Description is required");
-    if (fileList.length > 5) return message.error("Maximum 5 images are allowed");
-    if (description.length > 1200) {
+    if (fileList.length > 5)
+      return message.error("Maximum 5 images are allowed");
+    if (getPlainText(description).length > 1200) {
       return message.error("Description is too long");
     }
     title = title.trim();
@@ -62,7 +69,7 @@ const AddCampaign = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-        }
+        },
       );
       console.log(res.data);
       message.success("Campaign Created Successfully");
@@ -74,7 +81,7 @@ const AddCampaign = () => {
   };
   return (
     <div className="mx-auto p-3 md:max-w-[80%] w-full">
-      <div className="my-10">
+      <div className="my-20">
         <h2 className="text-4xl text-center text-primary font-bold">
           Add Campaign
         </h2>
@@ -146,7 +153,19 @@ const AddCampaign = () => {
               </Form.Item>
             </Col>
             <Col lg={24} md={24} sm={24} xs={24}>
-              <Form.Item label={<p className='flex items-center gap-2'>Description <span className={` ${state.description.length > 1200 ? 'text-red-500' : 'text-green-500'}`}>{state.description.length}/1200</span></p>} className="editor-box">
+              <Form.Item
+                label={
+                  <p className="flex items-center gap-2">
+                    Description{" "}
+                    <span
+                      className={` ${getPlainText(state.description).length > 1200 ? "text-red-500" : "text-green-500"}`}
+                    >
+                      {getPlainText(state.description).length}/1200
+                    </span>
+                  </p>
+                }
+                className="editor-box"
+              >
                 <ReactQuill
                   onChange={(val) =>
                     setState((s) => ({ ...s, description: val }))
@@ -177,7 +196,7 @@ const AddCampaign = () => {
                     setState(initalState);
                     setFileList([]);
                   }}
-                  className="btn-beta !px-10 transition-150"
+                  className="btn-secondary !px-10 transition-150"
                 >
                   Clear
                 </button>
