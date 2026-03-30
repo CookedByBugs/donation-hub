@@ -1,4 +1,4 @@
-const Campaign = require("../../../models/campaign/campaign.model");
+const Campaign = require("../../models/campaign/campaign.model");
 const deleteController = async (req, res) => {
   try {
     const campaign = await Campaign.findByIdAndDelete(req.params.id);

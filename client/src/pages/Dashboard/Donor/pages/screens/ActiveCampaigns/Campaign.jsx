@@ -12,7 +12,7 @@ const Campaign = ({ campaigns }) => {
           let percentage = (raised / goal) * 100;
           percentage = Math.floor(percentage);
           return (
-            <Col key={campaign._id} lg={8} md={12} sm={24} xs={24}>
+            <Col key={campaign._id} xl={6} lg={8} md={12} sm={24} xs={24}>
               <div
                 onClick={() =>
                   navigate(`/dashboard/active-campaigns/${campaign._id}`)
@@ -49,7 +49,7 @@ const Campaign = ({ campaigns }) => {
                     </div>
                   </div>
                   <div className="px-3">
-                    <button className="btn-primary">Donate</button>
+                    <button className="btn-primary">View</button>
                   </div>
                 </div>
               </div>

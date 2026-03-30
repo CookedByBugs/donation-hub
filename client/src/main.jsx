@@ -7,15 +7,15 @@ import AuthProvider from "./contexts/Auth/AuthContext.jsx";
 import TabProvider from "./contexts/Tab/TabContext.jsx";
 import CampaignProvider from "./contexts/Campaigns/CampaignContext.jsx";
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <TabProvider>
-          <CampaignProvider>
-            <App />
-          </CampaignProvider>
-        </TabProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <AuthProvider>
+      <TabProvider>
+        <CampaignProvider>
+          <App />
+        </CampaignProvider>
+      </TabProvider>
+    </AuthProvider>
+  </BrowserRouter>,
+  // </StrictMode>
 );
