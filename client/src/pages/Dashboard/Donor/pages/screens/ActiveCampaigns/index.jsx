@@ -32,7 +32,6 @@ const ActiveCampaigns = () => {
 
       setCampaigns(res.data.campaigns);
       setTotalCampaigns(res.data.total);
-      console.table(res.data);
       setTotalPages(res.data.totalPages);
     } catch (error) {
       console.log(error);

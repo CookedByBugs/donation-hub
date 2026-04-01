@@ -1,18 +1,14 @@
 import { useAuthContext } from "@/contexts/Auth/AuthContext";
-import { Col, Row, Pagination } from "antd";
+import { Col, Row } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Donations = () => {
+const Recent = () => {
   const navigate = useNavigate();
-  const [donations, setDonations] = useState([]);
-  const [totalDonations, setTotalDonations] = useState(0);
   const { user } = useAuthContext();
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(12);
-  const fetchDonations = async () => {
+  const [recentDonations, setRecentDonations] = useState([]);
+  const fetchRecentDonations = async () => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/campaign/donations`,
@@ -20,26 +16,31 @@ const Donations = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-          params: { id: user?._id, page, limit },
+          params: {
+            id: user?._id,
+            page: 1,
+            limit: 3,
+          },
         },
       );
-      setDonations(res.data.donations);
-      setTotalDonations(res.data.totalDonations);
-      setTotalPages(res.data.totalPages);
-      setLimit(res.data.limit);
+      setRecentDonations(res?.data?.donations);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   useEffect(() => {
-    if (!user?._id) return;
-    fetchDonations();
-  }, [user, page]);
-
+    fetchRecentDonations();
+  }, []);
   return (
     <div>
+      <div className="flex justify-between items-center mb-6">
+        <p className="text-2xl font-bold">Recent Activites</p>
+        <Link to="/dashboard/donation-history" className="text-primary">
+          View All
+        </Link>
+      </div>
       <Row gutter={[16, 16]}>
-        {donations.map((donation) => {
+        {recentDonations.map((donation) => {
           return (
             <Col lg={8} md={12} sm={24} xs={24} key={donation._id}>
               <div
@@ -68,17 +69,8 @@ const Donations = () => {
           );
         })}
       </Row>
-      <div className="my-5">
-        <Pagination
-          align="center"
-          current={page}
-          total={totalDonations}
-          pageSize={limit}
-          onChange={(page) => setPage(page)}
-        />
-      </div>
     </div>
   );
 };
 
-export default Donations;
+export default Recent;
