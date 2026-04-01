@@ -8,21 +8,21 @@
 }
 
 .btn-primary {
-  @apply cursor-pointer transition-all duration-150 bg-[#25d3c2] text-white px-5 py-2 select-none rounded hover:bg-[#2cf9e5];
+  @apply cursor-pointer transition-all duration-150 bg-[#25d3c2] text-white px-5 py-2 select-none rounded hover:brightness-90;
 }
 
 .btn-secondary {
-  @apply cursor-pointer transition-all duration-150 bg-[#82fdf1] text-black px-5 py-2 select-none rounded hover:bg-[#64d7cc];
+  @apply cursor-pointer transition-all duration-150 bg-[#82fdf1] text-black px-5 py-2 select-none rounded hover:brightness-90;
 }
 
 .btn-danger {
-  @apply cursor-pointer transition-all duration-150 bg-[#DC2626] text-white px-5 py-2 select-none rounded hover:bg-[#B91C1C];
+  @apply cursor-pointer transition-all duration-150 bg-[#DC2626] text-white px-5 py-2 select-none rounded hover:brightness-90;
 }
 
 .btn-success {
-  @apply cursor-pointer transition-all duration-150 bg-[#166534] text-white px-5 py-2 select-none rounded hover:bg-[#14532D];
+  @apply cursor-pointer transition-all duration-150 bg-[#166534] text-white px-5 py-2 select-none rounded hover:brightness-90;
 }
 
 .btn-beta {
-  @apply px-5 py-2 rounded bg-[#64748B] text-white hover:bg-[#475569];
+  @apply px-5 py-2 rounded bg-[#64748B] text-white hover:brightness-90;
 }

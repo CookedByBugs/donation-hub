@@ -17,7 +17,7 @@ const Campaign = ({ campaigns }) => {
                 onClick={() =>
                   navigate(`/dashboard/active-campaigns/${campaign._id}`)
                 }
-                className="border cursor-pointer border-gray-400 rounded-2xl hover:shadow-lg transition-300 hover:shadow-gray-400 h-full"
+                className="border bg-white cursor-pointer border-gray-400 rounded-2xl hover:shadow-lg transition-300 hover:shadow-gray-400 h-full"
               >
                 <div className="">
                   <img

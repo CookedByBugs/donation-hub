@@ -6,6 +6,7 @@ import CampaignViewer from "./screens/CampaignViewer";
 import Profile from "./screens/Profile";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "@/components/stripe";
+import DonationHistory from "./screens/DonationHistory";
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
         }
       />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/donation-history" element={<DonationHistory />} />
     </Routes>
   );
 };

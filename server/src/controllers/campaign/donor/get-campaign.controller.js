@@ -16,6 +16,7 @@ const getCampaigns = async (req, res) => {
       message: "Campaigns fetched successfully",
       campaigns,
       totalPages: Math.ceil(total / limit),
+      total,
       page: parseInt(page),
       limit: parseInt(limit),
     });

@@ -4,7 +4,7 @@ const Info = ({ campaign }) => {
   const [showMore, setShowMore] = useState(false);
   return (
     <div>
-      <div className="shadow-xl rounded-2xl overflow-hidden md:p-10 p-5">
+      <div className="shadow-xl bg-white rounded-2xl overflow-hidden md:p-10 p-5">
         <h3 className="text-2xl font-semibold">Fundraising Progress</h3>
         <div className="grid grid-cols-2 gap-2 mt-2">
           <div className="p-3 bg-orange-500/20 rounded-xl ">

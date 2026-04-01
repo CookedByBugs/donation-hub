@@ -56,7 +56,7 @@ const CampaignViewer = () => {
     };
   }, [fetchCampaign]);
   return (
-    <div className="mt-30">
+    <div className="md:pt-30 pt-20">
       <div className="my-10">
         <h1 className="text-center text-primary font-bold text-4xl mb-5">
           {campaign.title}

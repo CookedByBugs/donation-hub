@@ -47,7 +47,7 @@ const Profile = () => {
 
   console.log(user);
   return (
-    <div className="md:mt-40 mt-30 md:max-w-[80%] max-w-[95%] w-full mx-auto">
+    <div className="md:pt-40 pt-30 md:max-w-[80%] max-w-[95%] w-full mx-auto">
       <div className="mb-10">
         <h2 className="md:text-5xl text-2xl">
           Welcome,{" "}

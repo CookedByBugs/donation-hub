@@ -13,6 +13,7 @@ const campaignSchema = new mongoose.Schema(
     endDate: { type: Date, required: true },
     image: [{ type: String }],
     description: { type: String, required: true },
+    donors: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

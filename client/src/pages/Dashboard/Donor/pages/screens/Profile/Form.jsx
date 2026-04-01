@@ -127,7 +127,7 @@ const ProfileForm = () => {
   ];
   return (
     <div className="my-10">
-      <div className="rounded-2xl shadow-xl border border-gray-400 p-5">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-400 p-5">
         <Form>
           <Row gutter={[16, 16]}>
             <Col span={24}>
