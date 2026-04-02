@@ -4,33 +4,8 @@ import axios from "axios";
 import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
 
-const Completed = ({ activeTab }) => {
-  const [campaigns, setCampaign] = useState([]);
+const Completed = ({ campaigns, setCampaigns }) => {
   const { handleDelete } = useCampaignContext();
-
-
-
-  const getCampaign = useCallback(async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/campaign/get-completed`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        }
-      );
-      console.table(res.data.campaigns);
-      setCampaign(res.data.campaigns);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-  useEffect(() => {
-    if (activeTab == "completed") {
-      getCampaign();
-    }
-  }, [activeTab]);
 
   return (
     <div className="">
@@ -62,7 +37,7 @@ const Completed = ({ activeTab }) => {
                   onClick={() => {
                     handleDelete(c._id);
                     setCampaign(
-                      campaigns.filter((campaign) => campaign._id !== c._id)
+                      campaigns.filter((campaign) => campaign._id !== c._id),
                     );
                   }}
                   className="btn-danger w-full"

@@ -7,13 +7,14 @@ const CampaignContext = createContext();
 const CampaignProvider = ({ children }) => {
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/campaign/delete/${id}`,
+      const res = await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/campaign/update-status/${id}`,
+        { status: "inactive" },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-        }
+        },
       );
       console.log(res);
       message.success("Campaign deleted successfully");
@@ -22,9 +23,26 @@ const CampaignProvider = ({ children }) => {
       console.error(error);
     }
   };
+  const handleComplete = async (id) => {
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/campaign/update-status/${id}`,
+        { status: "completed" },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        },
+      );
+      message.success("Campaign completed successfully");
+    } catch (error) {
+      message.error("Failed to complete campaign");
+      console.error(error);
+    }
+  };
 
   return (
-    <CampaignContext.Provider value={{ handleDelete }}>
+    <CampaignContext.Provider value={{ handleDelete, handleComplete }}>
       {children}
     </CampaignContext.Provider>
   );

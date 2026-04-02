@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Input } from "antd";
 import AllCampaign from "./AllCampaign";
 const CampaignManagement = () => {
+  document.title = "Campaign Management";
   return (
     <div className="max-w-[80%] mx-auto w-full mt-28">
       <h1 className="text-center md:text-4xl text-2xl font-bold my-10 text-primary">

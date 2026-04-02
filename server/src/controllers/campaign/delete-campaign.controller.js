@@ -1,7 +1,9 @@
 const Campaign = require("../../models/campaign/campaign.model");
 const deleteController = async (req, res) => {
   try {
-    const campaign = await Campaign.findByIdAndDelete(req.params.id);
+    const campaign = await Campaign.findByIdAndUpdate(req.query.id, {
+      status: "inactive",
+    });
     if (!campaign) {
       return res.status(404).json({ msg: "Campaign not found" });
     }

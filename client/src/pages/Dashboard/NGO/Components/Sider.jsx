@@ -19,11 +19,6 @@ const Sider = () => {
       to: "/dashboard/campaign-management",
       icons: NotificationOutlined,
     },
-    {
-      label: "Analytics & Reports",
-      to: "/dashboard/analytics-reports",
-      icons: SafetyCertificateOutlined,
-    },
   ];
 
   return (

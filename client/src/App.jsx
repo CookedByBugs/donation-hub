@@ -5,6 +5,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import socket from "./components/socket";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { ConfigProvider } from "antd";
 
 const App = () => {
   Aos.init({
@@ -26,9 +27,9 @@ const App = () => {
     };
   }, []);
   return (
-    <main>
+    <ConfigProvider theme={{ token: { colorPrimary: "25d3c2" } }}>
       <Routes />
-    </main>
+    </ConfigProvider>
   );
 };
 

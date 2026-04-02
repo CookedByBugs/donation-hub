@@ -22,7 +22,7 @@ const campaignSchema = new mongoose.Schema(
     // ngo: { type: String, required: true },
     status: {
       type: String,
-      enum: ["active", "inactive"],
+      enum: ["active", "inactive", "completed"],
       default: "active",
     },
   },

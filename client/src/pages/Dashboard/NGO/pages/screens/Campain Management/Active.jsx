@@ -3,51 +3,13 @@ import axios from "axios";
 import { Col, message, Row } from "antd";
 import { CloseOutlined, MoreOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useCampaignContext } from "../../../../../../../contexts/Campaigns/CampaignContext";
+import { useCampaignContext } from "@/contexts/Campaigns/CampaignContext";
 
-const Active = () => {
+const Active = ({ campaigns, setCampaigns }) => {
   const navigate = useNavigate();
-  const [campaigns, setCampaigns] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [propogation, setPropogation] = useState(true);
-  const { handleDelete } = useCampaignContext();
-
-  const getCampaigns = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/campaign/active`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        }
-      );
-      setCampaigns(res.data.campaigns);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getCampaigns();
-  }, []);
-
-  const handleComplete = (id) => {
-    try {
-      const res = axios.put(
-        `${import.meta.env.VITE_API_URL}/api/campaign/set-completed/${id}`,
-        { status: "complted" },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        }
-      );
-      message.success("Campaign completed successfully");
-    } catch (error) {
-      console.log(error);
-      message.error("Campaign completed failed");
-    }
-  };
+  const { handleDelete, handleComplete } = useCampaignContext();
 
   const menuOpen = (id) => {
     setIsOpen(id);
@@ -60,6 +22,7 @@ const Active = () => {
             return (
               <Col
                 key={c._id}
+                xl={6}
                 lg={8}
                 md={12}
                 xs={24}
@@ -134,7 +97,9 @@ const Active = () => {
                       onClick={(e) => {
                         e.stopPropagation();
                         setCampaigns(
-                          campaigns.filter((campaign) => campaign._id !== c._id)
+                          campaigns.filter(
+                            (campaign) => campaign._id !== c._id,
+                          ),
                         );
                         handleDelete(c._id);
                       }}
@@ -148,7 +113,9 @@ const Active = () => {
                         e.stopPropagation();
                         handleComplete(c._id);
                         setCampaigns(
-                          campaigns.filter((campaign) => campaign._id !== c._id)
+                          campaigns.filter(
+                            (campaign) => campaign._id !== c._id,
+                          ),
                         );
                       }}
                       className="btn-primary hover:opacity-90 transition-opacity"
