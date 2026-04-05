@@ -19,7 +19,11 @@ const campaignSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // ngo: { type: String, required: true },
+    ngo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     status: {
       type: String,
       enum: ["active", "inactive", "completed"],

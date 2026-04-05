@@ -50,22 +50,28 @@
 }
 
 .text-section {
-  @apply !text-[#FFB433]; 
+  @apply !text-[#FFB433];
 }
 
 .text-foot {
-  @apply !text-[#F8FAFC]; 
+  @apply !text-[#F8FAFC];
 }
 
 .text-success {
-  @apply !text-[#166534]; 
+  @apply !text-[#166534];
 }
 
 .text-danger {
-  @apply !text-[#DC2626]; 
+  @apply !text-[#DC2626];
 }
 
 /* HOVER / INTERACTION */
 .hover-bg-secondary {
-  @apply hover:bg-[#6bf4e6]; 
+  @apply hover:bg-[#6bf4e6];
+}
+.hover-text-primary {
+  @apply hover:text-[#25d3c2];
+}
+.hover-bg-primary {
+  @apply hover:bg-[#25d3c2];
 }

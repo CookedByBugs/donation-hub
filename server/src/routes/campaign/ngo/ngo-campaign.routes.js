@@ -8,42 +8,35 @@ const createController = require("../../../controllers/campaign/ngo/create-campa
 const getCampaigns = require("../../../controllers/campaign/ngo/getCampaigns.campaign.controller");
 const getSingleController = require("../../../controllers/campaign/ngo/get-single.campaign.controller");
 const updateController = require("../../../controllers/campaign/ngo/update-campaign.controller");
-const deleteController = require("../../../controllers/campaign/delete-campaign.controller");
-const setCompletedController = require("../../../controllers/campaign/ngo/set-completed.campaign.controller");
-const getCompletedCampaignController = require("../../../controllers/campaign/ngo/get-completeed.campaign.controller");
 const updateStatusController = require("../../../controllers/campaign/ngo/update-status.campaign.controller");
-
+const getLatestDonationsController = require("../../../controllers/campaign/ngo/get-latest-donations.controller");
+const getTopCampaigns = require("../../../controllers/campaign/ngo/top-campaigns.controller");
+const getStats = require("../../../controllers/campaign/ngo/get-stats.controller");
 ngoCampaignRouter.post(
   "/create",
   verifyToken,
   upload.array("images"),
   createController,
 );
-ngoCampaignRouter.get("/get/:id", verifyToken, getSingleController);
 ngoCampaignRouter.put(
   "/update/:id",
   verifyToken,
   upload.array("images"),
   updateController,
 );
-ngoCampaignRouter.get("/", verifyToken, getCampaigns);
 ngoCampaignRouter.put(
   "/update-status/:id",
   verifyToken,
   updateStatusController,
 );
-// ngoCampaignRouter.delete("/delete/:id", verifyToken, deleteController);
-// ngoCampaignRouter.put(
-//   "/set-completed/:id",
-//   verifyToken,
-//   setCompletedController,
-// );
-
-// ngoCampaignRouter.get("/active", verifyToken, activeController);
-// ngoCampaignRouter.get(
-//   "/get-completed",
-//   verifyToken,
-//   getCompletedCampaignController,
-// );
+ngoCampaignRouter.get("/get/:id", verifyToken, getSingleController);
+ngoCampaignRouter.get("/", verifyToken, getCampaigns);
+ngoCampaignRouter.get(
+  "/latest-donations",
+  verifyToken,
+  getLatestDonationsController,
+);
+ngoCampaignRouter.get("/top-campaigns", verifyToken, getTopCampaigns);
+ngoCampaignRouter.get("/stats", verifyToken, getStats);
 
 module.exports = ngoCampaignRouter;

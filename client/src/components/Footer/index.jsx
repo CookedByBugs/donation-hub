@@ -4,66 +4,104 @@ import {
   InstagramOutlined,
   LinkedinFilled,
   MailOutlined,
-  TikTokOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/logo.jpeg";
+
 const Footer = () => {
   return (
-    <footer className="max-w-[95%] mx-auto w-full md:grid grid-cols-3 py-5">
-      <div className="md:text-4xl text-2xl">
+    <footer className="bg-nav pt-16 pb-8 border-t border-gray-200 mt-auto w-full">
+      <div className="max-w-[95%] md:max-w-[80%] mx-auto w-full flex flex-col md:flex-row gap-12 md:gap-8 justify-between">
+        {/* Brand Section */}
+        <div className="md:w-1/3 flex flex-col gap-6">
+          <div className="flex items-center gap-3">
+            <img
+              src={Logo}
+              alt="Donation Hub Logo"
+              className="w-12 h-12 rounded-full shadow-sm"
+            />
+            <span className="text-3xl font-extrabold text-gray-800 tracking-tight">
+              Donation <span className="text-primary font-medium">Hub</span>
+            </span>
+          </div>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            Empowering communities to make a lasting difference. Join us in
+            connecting generous donors with verified NGOs across the globe to
+            fund meaningful campaigns.
+          </p>
+          <div className="flex gap-4 items-center">
+            <div className="social-icons flex items-center justify-center w-10 h-10">
+              <InstagramOutlined className="text-lg" />
+            </div>
+            <div className="social-icons flex items-center justify-center w-10 h-10">
+              <LinkedinFilled className="text-lg" />
+            </div>
+            <div className="social-icons flex items-center justify-center w-10 h-10">
+              <MailOutlined className="text-lg" />
+            </div>
+          </div>
+        </div>
+
+        {/* Links Section */}
+        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold text-xl text-gray-800 mb-2">Join Us</h3>
+            <Link to="/auth/login" className="foot-link !border-none w-max">
+              Login
+            </Link>
+            <Link to="/auth/register" className="foot-link !border-none w-max">
+              Register
+            </Link>
+            <Link to="/dashboard" className="foot-link !border-none w-max">
+              Dashboard
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold text-xl text-gray-800 mb-2">Company</h3>
+            <Link to="/about" className="foot-link !border-none w-max">
+              About Us
+            </Link>
+            <Link to="/contact" className="foot-link !border-none w-max">
+              Contact
+            </Link>
+            <Link to="/blog" className="foot-link !border-none w-max">
+              Blog & News
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold text-xl text-gray-800 mb-2">Info</h3>
+            <Link to="/about" className="foot-link !border-none w-max">
+              Privacy Policy
+            </Link>
+            <Link to="/about" className="foot-link !border-none w-max">
+              Terms of Service
+            </Link>
+            <Link to="/about" className="foot-link !border-none w-max">
+              Help Center
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="max-w-[95%] md:max-w-[80%] mx-auto w-full mt-16 pt-8 border-t border-gray-300/50 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 font-medium">
         <p>
-          <HeartFilled className="bg-primary !text-white rounded-full p-3 mr-3" />
-          <span className="font-bold">Donation</span> Hub
+          &copy; {new Date().getFullYear()} Donation Hub. All Rights Reserved.
         </p>
-        <div className="flex gap-4 my-5 items-center">
-          <div className="social-icons">
-            <InstagramOutlined />
-          </div>
-          <div className="social-icons">
-            <LinkedinFilled />
-          </div>
-          <div className="social-icons">
-            <MailOutlined />
-          </div>
-        </div>
-      </div>
-      <hr className="md:hidden my-5 opacity-50" />
-      <div className="md:flex justify-evenly items-center col-span-2 w-full">
-        <div className="md:my-0 my-5">
-          <p className="font-bold text-xl">Join Us</p>
-          <Link to="/auth/login" className="foot-link">
-            Login
-          </Link>
-          <br />
-          <Link to="/auth/register" className="foot-link">
-            Register
-          </Link>
-        </div>
-        <div className="md:my-0 my-5">
-          <p className="font-bold text-xl">Company</p>
-          <Link to="/about" className="foot-link">
-            About
-          </Link>
-          <br />
-          <Link to="/blog" className="foot-link">
-            Blog & News
-          </Link>
-        </div>
-        <div className="md:my-0 my-5">
-          <p className="font-bold text-xl">Info</p>
-          <Link to="/about" className="foot-link">
+        <div className="flex gap-6">
+          <p className="hover-text-primary cursor-pointer transition-colors">
             Privacy
-          </Link>
-          |<Link className="foot-link">Terms</Link>
-          <br />
-          <Link to="/blog" className="foot-link">
-            Blog & News
-          </Link>
+          </p>
+          <p className="hover-text-primary cursor-pointer transition-colors">
+            Terms
+          </p>
+          <p className="hover-text-primary cursor-pointer transition-colors">
+            Cookies
+          </p>
         </div>
       </div>
-      <p className="text-center text-semibold">
-        &copy; {new Date().getFullYear()}. All Rights Reserved
-      </p>
     </footer>
   );
 };

@@ -1,52 +1,71 @@
 import React from "react";
 import { Col, Row } from "antd";
 import {
-  DollarCircleFilled,
   DollarCircleOutlined,
   HeartFilled,
   StarFilled,
-  StarOutlined,
 } from "@ant-design/icons";
+
 const WhyDonationHub = () => {
   const cards = [
     {
       icon: HeartFilled,
-      title: "no middle man",
+      title: "No Middle Man",
       description:
-        "Donate with confidence knowing your money made it to the organisation without greedy middlemen like marketers, salespeople and software companies taking a cut.",
+        "Donate with confidence knowing your money made it to the organisation without middlemen like marketers or sales teams taking a cut.",
     },
     {
       icon: StarFilled,
-      title: "convenience",
+      title: "Ultimate Convenience",
       description:
-        "Donate to multiple organisations and manage them all in one place. Customise donations by amount and frequency, and easily manage your preferences at any time.",
+        "Donate to multiple organizations and manage them all in one place. Customise donations by amount, frequency, and manage preferences effortlessly.",
     },
     {
       icon: DollarCircleOutlined,
-      // icon: DollarCircleFilled,
-      title: "low fees",
+      title: "Incredibly Low Fees",
       description:
-        "As an organisation, DonationHub helps you raise more money and reduce costs with super-low fees that can be passed onto the donor if they wish. We also give you a bunch of handy fundraising tools!",
+        "We help organisations raise more money and reduce costs with super-low fees. We also provide a bunch of handy fundraising tools totally free of charge!",
     },
-    // NEXT  JS  //  stapi // sanity // payload
   ];
+
   return (
-    <div className="max-w-[95%]  mx-auto ">
-      <h2 className="text-center text-4xl font-semibold mt-10 mb-5">
-        Why Choose Donation Hub?
-      </h2>
-      <div className="mx-auto">
-        <Row gutter={[16, 16]}>
+    <div className="py-24 bg-white">
+      <div className="max-w-[95%] md:max-w-[80%] mx-auto">
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">
+            Why Choose <span className="text-primary">Donation Hub?</span>
+          </h2>
+          <p className="text-xl text-gray-500 mt-4 max-w-2xl mx-auto">
+            We are revolutionizing the way you give, ensuring maximum
+            transparency and impact for every single contribution.
+          </p>
+        </div>
+
+        <Row
+          gutter={[
+            { xs: 16, sm: 24, md: 32, lg: 48 },
+            { xs: 16, sm: 24, md: 32, lg: 48 },
+          ]}
+        >
           {cards.map((card, i) => (
             <Col lg={8} md={12} sm={24} xs={24} key={i}>
-              <div data-aos="fade-up" className="p-5">
-                <div className="text-center flex justify-center items-center">
-                  <card.icon className="!text-white bg-primary p-3 rounded-full text-5xl" />
+              <div
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
+                className="group h-full bg-nav border border-gray-100 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+
+                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 group-hover:bg-primary transition-colors duration-300">
+                  <card.icon className="text-3xl text-primary group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h2 style={{fontFamily: "cursive"}} className="my-5 text-2xl uppercase font-semibold text-center">
+
+                <h3 className="text-2xl font-bold text-gray-800 mb-4 tracking-tight">
                   {card.title}
-                </h2>
-                <p className="sm:text-lg text-[15px] text-gray-800 font-medium">{card.description}</p>
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-lg pb-4">
+                  {card.description}
+                </p>
               </div>
             </Col>
           ))}

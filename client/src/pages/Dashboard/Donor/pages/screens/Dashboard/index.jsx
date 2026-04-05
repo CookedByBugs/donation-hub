@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { user } = useAuthContext();
 
   return (
-    <div className="md:max-w-[80%] max-w-[95%] mx-auto">
+    <div className="md:max-w-[80%] max-w-[95%] md:p-0 p-3 mx-auto">
       <Analysis />
       <hr className="text-primary w-[80%] mx-auto mb-10" />
       <Recent />

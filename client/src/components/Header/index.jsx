@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   return (
-    <header className="fiexed top-0 left-0 right-0 z-20">
+    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
       <Navbar />
     </header>
   );

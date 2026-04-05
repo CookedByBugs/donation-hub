@@ -1,8 +1,9 @@
 import React from "react";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Input } from "antd";
 import AllCampaign from "./AllCampaign";
+
 const CampaignManagement = () => {
   document.title = "Campaign Management | Donation Hub";
 
@@ -11,26 +12,32 @@ const CampaignManagement = () => {
   };
 
   return (
-    <div className="bg-nav w-full pt-28">
-      <div className="max-w-[80%] mx-auto">
-        <h1 className="text-center md:text-4xl text-2xl font-bold my-10 text-primary">
-          Campaign Management
-        </h1>
-        <div>
-          <div className="flex justify-end my-10">
-            <Link
-              to="/dashboard/campaign-management/add-campaign"
-              className="btn-primary md:text-lg text-sm flex items-center gap-2"
-            >
-              <PlusOutlined />
-              Add Campaign
-            </Link>
+    <div className="min-h-screen bg-gray-50/50 pb-20 pt-28">
+      <div className="max-w-[95%] md:max-w-[85%] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <h1 className="md:text-4xl text-3xl font-extrabold text-gray-800 tracking-tight">
+              Campaign <span className="text-primary font-medium">Management</span>
+            </h1>
+            <p className="text-gray-500 mt-2 text-lg">Manage, create, and track all your campaigns.</p>
           </div>
-          <div className="max-w-[500px] mx-auto p-3">
+          <Link
+            to="/dashboard/campaign-management/add-campaign"
+            className="btn-primary md:text-base text-sm flex items-center justify-center gap-2 px-6 py-3 shadow-md hover:shadow-lg transition-all rounded-xl"
+          >
+            <PlusOutlined />
+            Create Campaign
+          </Link>
+        </div>
+        
+        <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6 md:p-8">
+          <div className="max-w-md mb-8">
             <Input.Search
               onSearch={handleSearch}
-              placeholder="Search Campaign"
-              className="border border-gray-300 rounded-lg"
+              placeholder="Search campaigns..."
+              size="large"
+              enterButton={<SearchOutlined />}
+              className="custom-search"
             />
           </div>
           <div className="">
