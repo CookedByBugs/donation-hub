@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { CloseOutlined } from "@ant-design/icons";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
 const Campaign = () => {
+  document.title = "Update Campaign | Donation Hub";
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [imageList, setImageList] = useState([]);
@@ -62,7 +63,9 @@ const Campaign = () => {
         title: campaign.title || "",
         goalAmount: campaign.goalAmount || "",
         category: campaign.category || "",
-        endDate: campaign.endDate || "",
+        endDate: campaign.endDate
+          ? new Date(campaign.endDate).toISOString().slice(0, 16)
+          : "",
         description: campaign.description || "",
       });
     }

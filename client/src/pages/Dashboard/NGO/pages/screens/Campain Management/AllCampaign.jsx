@@ -1,8 +1,9 @@
 import { Pagination, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import Active from "./Active";
-import Completed from "../Completed";
+import Completed from "./Completed";
 import axios from "axios";
+import Expired from "./Expired";
 
 const AllCampaign = () => {
   const [activeTab, setActiveTab] = useState("active");
@@ -31,6 +32,7 @@ const AllCampaign = () => {
     }
   };
   useEffect(() => {
+    setCampaigns([]);
     setPage(1);
   }, [activeTab]);
   useEffect(() => {
@@ -59,13 +61,15 @@ const AllCampaign = () => {
             ),
           },
           {
-            key: "pending",
-            label: "Pending Approval",
-            children: <p>Pending</p>,
+            key: "inactive",
+            label: "Expired",
+            children: (
+              <Expired campaigns={campaigns} setCampaigns={setCampaigns} />
+            ),
           },
         ]}
       />
-      <div className="my-10">
+      <div className="py-10">
         <Pagination
           current={page}
           align="center"

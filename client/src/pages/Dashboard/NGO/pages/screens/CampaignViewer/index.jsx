@@ -3,13 +3,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import { Col, Row } from "antd";
-import Payment from "./Payment";
 import Info from "./Info";
 import Description from "./Description";
 import socket from "@/components/socket";
 
 const CampaignViewer = () => {
-  document.title = "Campaign Details | Donation Hub";
   const [campaign, setCampaign] = useState({});
   const [images, setImages] = useState([]);
   const { id } = useParams();
@@ -33,6 +31,7 @@ const CampaignViewer = () => {
 
   useEffect(() => {
     fetchCampaign();
+    document.title = "Campaign Stats | Donation Hub";
   }, [id]);
 
   useEffect(() => {
@@ -56,8 +55,9 @@ const CampaignViewer = () => {
       socket.off("campaign_completed");
     };
   }, [fetchCampaign]);
+
   return (
-    <div className="md:pt-30 pt-20">
+    <div className="md:pt-30 pt-20 bg-nav">
       <div className="my-10">
         <h1 className="text-center text-primary font-bold text-4xl mb-5">
           {campaign.title}
@@ -81,11 +81,8 @@ const CampaignViewer = () => {
           <Col span={24}>
             <hr className="text-primary my-3 max-w-[80%] mx-auto" />
           </Col>
-          <Col lg={12} md={12} sm={24} xs={24}>
+          <Col span={24}>
             <Info campaign={campaign} />
-          </Col>
-          <Col lg={12} md={12} sm={24} xs={24}>
-            <Payment campaign={campaign} />
           </Col>
         </Row>
       </div>

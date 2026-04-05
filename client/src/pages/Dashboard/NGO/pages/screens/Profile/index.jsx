@@ -5,6 +5,7 @@ import ProfileForm from "./Form";
 import { PlusOutlined, SwapRightOutlined } from "@ant-design/icons";
 import axios from "axios";
 const Profile = () => {
+  document.title = "Profile | Donation Hub";
   const { user, fetchProfile } = useAuthContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [preview, setPreview] = useState(null);

@@ -4,14 +4,11 @@ import { Form, Col, Row, Divider, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { UserOutlined, LockOutlined, LockFilled } from "@ant-design/icons";
 import axios from "axios";
-// Original: // import axios from "axios"
 import { useAuthContext } from "../../../contexts/Auth/AuthContext";
-// Original: // (no useAuthContext import)
 const Login = () => {
+  document.title = "Login | Donation Hub";
   const navigate = useNavigate();
   const { fetchProfile } = useAuthContext();
-  // Original:
-  // const navigate = useNavigate();
   const initState = {
     email: "",
     password: "",
@@ -41,13 +38,10 @@ const Login = () => {
         console.log(res.data);
         localStorage.setItem("authToken", res.data.token);
         if (res.data.status === "success") {
-          // setState(initState);
           message.success("User logged in successfully");
           console.log("Login was successful");
-          // Call fetchProfile so AuthContext updates immediately without refresh
           await fetchProfile();
-          // Original:
-          // navigate("/");
+
           navigate("/");
         }
       })

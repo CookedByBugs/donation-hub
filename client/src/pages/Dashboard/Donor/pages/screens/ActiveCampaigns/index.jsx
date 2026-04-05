@@ -3,6 +3,7 @@ import { Pagination, Tabs } from "antd";
 import axios from "axios";
 import Campaign from "./Campaign";
 const ActiveCampaigns = () => {
+  document.title = "Active Campaigns | Donation Hub";
   const [activeTab, setActiveTab] = useState("health");
   const [campaigns, setCampaigns] = useState([]);
   const [page, setPage] = useState(1);
@@ -16,7 +17,7 @@ const ActiveCampaigns = () => {
   const fetchCampaigns = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/campaign`,
+        `${import.meta.env.VITE_API_URL}/api/campaign/all`,
         {
           params: {
             category: activeTab,
@@ -29,7 +30,6 @@ const ActiveCampaigns = () => {
           },
         },
       );
-
       setCampaigns(res.data.campaigns);
       setTotalCampaigns(res.data.total);
       setTotalPages(res.data.totalPages);
@@ -59,7 +59,7 @@ const ActiveCampaigns = () => {
       children: <Campaign campaigns={campaigns} />,
     },
     {
-      key: "other",
+      key: "others",
       label: "Other",
       children: <Campaign campaigns={campaigns} />,
     },

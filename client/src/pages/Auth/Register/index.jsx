@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { LockFilled, PlusOutlined, UserOutlined } from "@ant-design/icons";
 const Register = () => {
+  document.title = "Register | Donation Hub";
   const navigate = useNavigate();
   const initState = {
     firstName: "",

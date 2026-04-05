@@ -1,8 +1,6 @@
 import { useCampaignContext } from "@/contexts/Campaigns/CampaignContext";
-import { Col, message, Row } from "antd";
-import axios from "axios";
-import clsx from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import { Col, Row } from "antd";
+import React from "react";
 
 const Completed = ({ campaigns, setCampaigns }) => {
   const { handleDelete } = useCampaignContext();
@@ -11,11 +9,8 @@ const Completed = ({ campaigns, setCampaigns }) => {
     <div className="">
       <Row gutter={[16, 16]}>
         {campaigns.map((c, i) => (
-          <Col lg={8} md={12} sm={24} xs={24}>
-            <div
-              className="shadow shadow-black/20 rounded-2xl mt-1 transition-300 hover:mt-0"
-              key={c._id}
-            >
+          <Col key={c._id} lg={8} md={12} sm={24} xs={24}>
+            <div className="bg-white shadow shadow-black/20 rounded-2xl mt-1 transition-300 hover:mt-0">
               <div className="relative">
                 <div className="absolute bg-white px-1 rounded-full top-3 left-3">
                   {c.status}
@@ -36,7 +31,7 @@ const Completed = ({ campaigns, setCampaigns }) => {
                 <button
                   onClick={() => {
                     handleDelete(c._id);
-                    setCampaign(
+                    setCampaigns(
                       campaigns.filter((campaign) => campaign._id !== c._id),
                     );
                   }}

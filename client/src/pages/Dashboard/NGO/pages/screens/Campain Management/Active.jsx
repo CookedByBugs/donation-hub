@@ -22,7 +22,6 @@ const Active = ({ campaigns, setCampaigns }) => {
             return (
               <Col
                 key={c._id}
-                xl={6}
                 lg={8}
                 md={12}
                 xs={24}
@@ -30,23 +29,29 @@ const Active = ({ campaigns, setCampaigns }) => {
                 className="relative"
               >
                 <div
-                  onClick={() =>
+                  onClick={() => {
                     propogation &&
-                    navigate(`/dashboard/campaign-management/${c._id}`)
-                  }
+                      navigate(`/dashboard/campaign-viewer/${c._id}`);
+                  }}
                   className="cursor-pointer h-full flex flex-col group rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm hover:shadow-lg transition-all duration-200 ease-out hover:-translate-y-0.5"
                 >
-                  {isOpen === c._id && (
-                    <ul
-                      onMouseEnter={() => setPropogation(false)}
-                      onMouseLeave={() => setPropogation(true)}
-                      className="absolute max-h-[100px] overflow-y-scroll z-10 top-10 right-15 bg-white p-1 rounded-lg"
+                  <ul
+                    onMouseEnter={() => setPropogation(false)}
+                    onMouseLeave={() => setPropogation(true)}
+                    className={`absolute overflow-hidden max-h-[100px] z-10 top-10 right-15 bg-white rounded-lg transition-all duration-300 ${isOpen === c._id ? "h-[40px]" : "h-0"}`}
+                  >
+                    <li
+                      onClick={(e) => {
+                        e.stopPropagation();
+
+                        navigate(`/dashboard/campaign-management/${c._id}`);
+                      }}
+                      className="p-2  cursor-pointer hover:bg-gray-200"
                     >
-                      <li className="p-2 cursor-pointer hover:bg-gray-200">
-                        Edit Campaign
-                      </li>
-                    </ul>
-                  )}
+                      Edit Campaign
+                    </li>
+                  </ul>
+
                   <div className="relative">
                     <img
                       className="w-full h-60 object-cover"

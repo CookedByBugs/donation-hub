@@ -5,6 +5,7 @@ import NGO from "./NGO";
 import Donor from "./Donor";
 
 const Dashboard = () => {
+  document.title = "Dashboard | Donation Hub";
   const { user } = useAuthContext();
   switch (user.role) {
     case "admin":

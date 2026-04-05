@@ -14,15 +14,15 @@ const Navbar = () => {
         </a>
 
         <nav className="hidden md:flex items-center gap-1">
-          <a className="nav-link transition-150" href="#">
+          <Link className="nav-link transition-150" to="/">
             Home
-          </a>
-          <a className="nav-link transition-150" href="#">
+          </Link>
+          <Link className="nav-link transition-150" to="/about">
             About
-          </a>
-          <a className="nav-link transition-150" href="#">
+          </Link>
+          <Link className="nav-link transition-150" to="/contact">
             Contact
-          </a>
+          </Link>
           <Link to="/dashboard" className="nav-link transition-150">
             Dashboard
           </Link>
