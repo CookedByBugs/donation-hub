@@ -9,7 +9,8 @@ require("./utils/node-cron");
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: "https://donaroid.vercel.app",
+    methods: ["GET", "POST"],
   },
 });
 app.set("io", io);
