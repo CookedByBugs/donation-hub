@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedAuth = ({Component}) => {
   const { isAuth } = useAuthContext();
-  if (isAuth) return <Navigate to="/" replace />
+  if (isAuth) return <Navigate to="/dashboard" replace />
   return <Component />;
 };
 

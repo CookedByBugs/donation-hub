@@ -41,8 +41,7 @@ const Login = () => {
           message.success("User logged in successfully");
           console.log("Login was successful");
           await fetchProfile();
-
-          navigate("/");
+          navigate("/dashboard");
         }
       })
       .catch((err) => {
