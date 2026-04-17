@@ -2,35 +2,22 @@ import { Pagination, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import Active from "./Active";
 import Completed from "./Completed";
-import axios from "axios";
 import Expired from "./Expired";
+import { useCampaignContext } from "@/contexts/Campaigns/CampaignContext";
 
 const AllCampaign = () => {
-  const [activeTab, setActiveTab] = useState("active");
-  const [campaigns, setCampaigns] = useState([]);
-  const [limit, setLimit] = useState(12);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const getCampaigns = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/campaign?status=${activeTab}&page=${page}&limit=${limit}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        },
-      );
-      setCampaigns(res.data.campaigns);
-      setTotalPages(res.data.totalPages);
-      setTotal(res.data.total);
-      setLimit(res.data.limit);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    getCampaigns,
+    activeTab,
+    setActiveTab,
+    campaigns,
+    setCampaigns,
+    limit,
+    page,
+    setPage,
+    total,
+  } = useCampaignContext();
+
   useEffect(() => {
     setCampaigns([]);
     setPage(1);

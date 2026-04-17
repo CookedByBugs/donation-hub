@@ -6,7 +6,23 @@ import React, { useEffect, useState } from "react";
 const Stats = ({ refresh }) => {
   const { user } = useAuthContext();
   const [stats, setStats] = useState({});
+  const formatNumber = (num) => {
+    if (!num) return 0;
 
+    if (num >= 1_000_000_000) {
+      return (num / 1_000_000_000).toFixed(1) + "B";
+    }
+
+    if (num >= 1_000_000) {
+      return (num / 1_000_000).toFixed(1) + "M";
+    }
+
+    if (num >= 1_000) {
+      return (num / 1_000).toFixed(1) + "K";
+    }
+
+    return num;
+  };
   const getStats = async () => {
     try {
       const res = await axios.get(
@@ -43,10 +59,10 @@ const Stats = ({ refresh }) => {
         <Col lg={8} md={12} sm={24} xs={24}>
           <div className="p-8 border border-gray-100 rounded-2xl bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default">
             <p className="text-gray-400 font-semibold text-sm uppercase tracking-wider mb-2">
-              Donors
+              Total Donations
             </p>
             <p className="text-4xl font-extrabold text-gray-800">
-              {stats?.totalDonors || 0}
+              ${formatNumber(stats?.totalAmount) || 0}
             </p>
           </div>
         </Col>
