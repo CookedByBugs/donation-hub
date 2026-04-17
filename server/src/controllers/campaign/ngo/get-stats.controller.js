@@ -16,11 +16,33 @@ const getStats = async (req, res) => {
         },
       },
       { $unwind: "$campaign" },
-      { $match: { "campaign.createdBy": new mongoose.Types.ObjectId(ngoId) } },
-      { $group: { _id: "$donorId" } }, // unique donors
-      { $count: "totalDonors" },
-    ]);
 
+      {
+        $match: {
+          "campaign.createdBy": new mongoose.Types.ObjectId(ngoId),
+        },
+      },
+
+      {
+        $group: {
+          _id: null,
+
+          // total unique donors
+          donors: { $addToSet: "$donorId" },
+
+          // total donation amount
+          totalAmount: { $sum: "$amount" },
+        },
+      },
+
+      {
+        $project: {
+          _id: 0,
+          totalDonors: { $size: "$donors" },
+          totalAmount: 1,
+        },
+      },
+    ]);
     const totalDonors = donorsAgg[0]?.totalDonors || 0;
 
     const runningCampaigns = await Campaign.countDocuments({
@@ -36,9 +58,10 @@ const getStats = async (req, res) => {
     res.json({
       success: true,
       data: {
-        totalDonors,
+        // totalDonors,
         runningCampaigns,
         successfulCampaigns,
+        totalAmount: donorsAgg[0]?.totalAmount || 0,
       },
     });
   } catch (error) {
