@@ -14,7 +14,7 @@ const LatestDonations = ({ refresh }) => {
           },
         },
       );
-      console.log(res.data);
+      // console.log(res.data);
       setDonations(res.data.donations);
     } catch (error) {
       console.error(error);
@@ -23,37 +23,37 @@ const LatestDonations = ({ refresh }) => {
   useEffect(() => {
     fetchDonations();
   }, [refresh]);
-  const columns = [
-    {
-      title: "Donor",
-      dataIndex: "donor",
-      key: "donor",
-    },
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Campaign",
-      dataIndex: "campaign",
-      key: "campaign",
-    },
-  ];
-  const dataSource = donations?.map((d, i) => {
-    return {
-      key: d._id,
-      donor: `${d.donorId.firstName} ${d.donorId.lastName}`,
-      amount: `$${d.amount}`,
-      date: new Date(d.createdAt).toLocaleDateString(),
-      campaign: d.campaignId.title,
-    };
-  });
+  // const columns = [
+  //   {
+  //     title: "Donor",
+  //     dataIndex: "donor",
+  //     key: "donor",
+  //   },
+  //   {
+  //     title: "Amount",
+  //     dataIndex: "amount",
+  //     key: "amount",
+  //   },
+  //   {
+  //     title: "Date",
+  //     dataIndex: "date",
+  //     key: "date",
+  //   },
+  //   {
+  //     title: "Campaign",
+  //     dataIndex: "campaign",
+  //     key: "campaign",
+  //   },
+  // ];
+  // const dataSource = donations?.map((d, i) => {
+  //   return {
+  //     key: d._id,
+  //     donor: `${d.donorId.firstName} ${d.donorId.lastName}`,
+  //     amount: `$${d.amount}`,
+  //     date: new Date(d.createdAt).toLocaleDateString(),
+  //     campaign: d.campaignId.title,
+  //   };
+  // });
   return (
     <div>
       <div className="flex items-center justify-between mb-6">

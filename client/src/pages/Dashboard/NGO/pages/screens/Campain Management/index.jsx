@@ -44,6 +44,7 @@ const CampaignManagement = () => {
         </div>
 
         <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6 md:p-8">
+          <div className="text-2xl font-bold my-3">Search Donations</div>
           <div className="max-w-md mb-8">
             <Input.Search
               onSearch={handleSearch}

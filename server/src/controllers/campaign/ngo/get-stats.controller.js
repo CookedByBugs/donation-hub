@@ -28,7 +28,7 @@ const getStats = async (req, res) => {
           _id: null,
 
           // total unique donors
-          donors: { $addToSet: "$donorId" },
+          // donors: { $addToSet: "$donorId" },
 
           // total donation amount
           totalAmount: { $sum: "$amount" },
@@ -38,12 +38,12 @@ const getStats = async (req, res) => {
       {
         $project: {
           _id: 0,
-          totalDonors: { $size: "$donors" },
+          // totalDonors: { $size: "$donors" },
           totalAmount: 1,
         },
       },
     ]);
-    const totalDonors = donorsAgg[0]?.totalDonors || 0;
+    // const totalDonors = donorsAgg[0]?.totalDonors || 0;
 
     const runningCampaigns = await Campaign.countDocuments({
       createdBy: ngoId,

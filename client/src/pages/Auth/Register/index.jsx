@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Form, Col, Row, Divider, message, Select, Upload } from "antd";
+import { Form, Col, Row, Divider, message, Select, Upload, Modal } from "antd";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { LockFilled, PlusOutlined, UserOutlined } from "@ant-design/icons";
+import Cropper from "react-easy-crop";
 const Register = () => {
   document.title = "Register | Donation Hub";
   const navigate = useNavigate();
@@ -18,9 +19,25 @@ const Register = () => {
   const [state, setState] = useState(initState);
   const [role, setRole] = useState("");
   const [image, setImage] = useState(null);
+  const [imgUrl, setImgUrl] = useState("");
+  const [modelOpen, setModelOpen] = useState(false);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (!image) return;
+
+    const url = URL.createObjectURL(image);
+    setImgUrl(url);
+
+    return () => {
+      URL.revokeObjectURL(url);
+    };
+  }, [image]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { firstName, lastName, email, password, confirmPassword } = state;
@@ -184,10 +201,10 @@ const Register = () => {
                         <Upload
                           beforeUpload={(file) => {
                             setImage(file);
+                            setModelOpen(true);
                             return false;
                           }}
                           maxCount={1}
-                          onChange={(e) => setImage(e.file)}
                           className="p-3"
                         >
                           <p className="flex items-center gap-2 shadow border rounded-lg p-2">
@@ -195,6 +212,25 @@ const Register = () => {
                             Upload Image
                           </p>
                         </Upload>
+                        <Modal
+                          open={modelOpen}
+                          onCancel={() => {
+                            setModelOpen(false);
+                          }}
+                        >
+                          {imgUrl && (
+                            <Cropper
+                              image={imgUrl}
+                              crop={crop}
+                              zoom={zoom}
+                              aspect={1 / 1}
+                              cropShape="round"
+                              showGrid={true}
+                              onCropChange={setCrop}
+                              onZoomChange={setZoom}
+                            />
+                          )}
+                        </Modal>
                       </Form.Item>
                     </Col>
                     <Col span={24}>
