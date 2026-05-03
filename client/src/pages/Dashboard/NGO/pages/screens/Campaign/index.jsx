@@ -122,7 +122,8 @@ const Campaign = () => {
         },
       );
       message.success("Campaign updated successfully");
-      console.log(res.data);
+      getCampaign();
+      setFile([]);
     } catch (error) {
       console.error(error);
       message.error("Failed to update campaign");

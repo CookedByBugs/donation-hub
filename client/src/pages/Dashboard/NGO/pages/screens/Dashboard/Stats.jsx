@@ -33,7 +33,7 @@ const Stats = ({ refresh }) => {
           },
         },
       );
-      console.log("Stats data", res.data.data);
+      // console.log("Stats data", res.data.data);
       setStats(res.data.data);
     } catch (error) {
       console.error(error);

@@ -30,33 +30,42 @@ const Completed = ({ campaigns, setCampaigns }) => {
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-2">
-                    <h2 className="text-xl font-bold text-gray-800 line-clamp-1">{c.title}</h2>
-                    <div className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.4)] flex-shrink-0 ml-2" title="Completed"></div>
+                    <h2 className="text-xl font-bold text-gray-800 line-clamp-1">
+                      {c.title}
+                    </h2>
+                    <div
+                      className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.4)] flex-shrink-0 ml-2"
+                      title="Completed"
+                    ></div>
                   </div>
-                  
+
                   <div className="mt-auto pt-6">
                     <div className="flex justify-between items-end mb-4">
                       <div>
-                        <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mb-1">Raised</p>
-                        <p className="text-lg font-bold text-gray-800">${raised.toLocaleString()}</p>
+                        <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mb-1">
+                          Raised
+                        </p>
+                        <p className="text-lg font-bold text-gray-800">
+                          ${raised.toLocaleString()}
+                        </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mb-1">Goal</p>
-                        <p className="text-sm font-semibold text-gray-600">${goal.toLocaleString()}</p>
+                        <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mb-1">
+                          Goal
+                        </p>
+                        <p className="text-sm font-semibold text-gray-600">
+                          ${goal.toLocaleString()}
+                        </p>
                       </div>
                     </div>
-
-                    <button
-                      onClick={() => {
-                        handleDelete(c._id);
-                        setCampaigns(
-                          campaigns.filter((campaign) => campaign._id !== c._id)
-                        );
-                      }}
-                      className="w-full text-center py-2.5 px-4 rounded-xl text-sm font-semibold text-rose-500 bg-rose-50 hover:bg-rose-500 hover:text-white transition-all duration-300"
-                    >
-                      Delete Campaign
-                    </button>
+                    <div className="mt-4 text-center border border-gray-400 rounded-lg p-2">
+                      <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mb-1">
+                        Completed at
+                      </p>
+                      <p className="text-sm font-semibold text-gray-600">
+                        {c.endDate.split("T")[0]}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
