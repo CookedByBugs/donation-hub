@@ -1,9 +1,10 @@
 const stripe = require("../../utils/stripe");
 const Campaign = require("../../models/campaign/campaign.model");
 const Donation = require("../../models/campaign/donation.model");
-
+const pusher = require("../../pusher");
 const stripeWebhook = async (req, res) => {
-  const io = req.app.get("io");
+  // const io = req.app.get("io");
+
   const sig = req.headers["stripe-signature"];
 
   let event;
@@ -39,6 +40,9 @@ const stripeWebhook = async (req, res) => {
       { new: true },
     );
 
+    // Fire on every successful donation so the donor-side viewer updates in real-time
+    pusher.trigger("campaigns", "donation_received", { campaignId });
+
     if (
       campaign.raisedAmount >= campaign.goalAmount &&
       campaign.status === "active"
@@ -46,18 +50,10 @@ const stripeWebhook = async (req, res) => {
       campaign.status = "inactive";
       await campaign.save();
 
-      io.emit("campaign_completed", {
+      pusher.trigger("campaigns", "campaign_completed", {
         campaignId: campaign._id,
       });
     }
-
-    io.emit("donation_received", {
-      amount,
-      donorId: paymentIntent.metadata.donorId,
-      campaignId,
-      paymentIntentId: paymentIntent.id,
-      status: paymentIntent.status,
-    });
   }
 
   res.json({ received: true });

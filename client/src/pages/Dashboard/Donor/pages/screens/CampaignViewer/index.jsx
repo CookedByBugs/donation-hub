@@ -6,7 +6,7 @@ import { Col, Row } from "antd";
 import Payment from "./Payment";
 import Info from "./Info";
 import Description from "./Description";
-import socket from "@/components/socket";
+import pusher from "@/components/pusherClient";
 
 const CampaignViewer = () => {
   document.title = "Campaign Details | Donation Hub";
@@ -14,7 +14,7 @@ const CampaignViewer = () => {
   const [images, setImages] = useState([]);
   const { id } = useParams();
 
-  const fetchCampaign = async () => {
+  const fetchCampaign = useCallback(async () => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/campaign/get/${id}`,
@@ -29,33 +29,37 @@ const CampaignViewer = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  useEffect(() => {
-    fetchCampaign();
   }, [id]);
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Socket connected", socket.id);
-    });
+    fetchCampaign();
+  }, [fetchCampaign]);
 
-    socket.on("donation_received", (data) => {
-      console.log("Donation received", data);
-      fetchCampaign();
-    });
-    socket.on("campaign_completed", (data) => {
-      if (data === campaign._id) {
+  useEffect(() => {
+    const channel = pusher.subscribe("campaigns");
+
+    const handleDonationReceived = (data) => {
+      if (data.campaignId === id) {
         fetchCampaign();
       }
-    });
+    };
+
+    const handleCampaignCompleted = (data) => {
+      if (String(data.campaignId) === id) {
+        fetchCampaign();
+      }
+    };
+
+    channel.bind("donation_received", handleDonationReceived);
+    channel.bind("campaign_completed", handleCampaignCompleted);
 
     return () => {
-      socket.off("connect");
-      socket.off("donation_received");
-      socket.off("campaign_completed");
+      channel.unbind("donation_received", handleDonationReceived);
+      channel.unbind("campaign_completed", handleCampaignCompleted);
+      pusher.unsubscribe("campaigns");
     };
-  }, [fetchCampaign]);
+  }, [id, fetchCampaign]);
+
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20 pt-28">
       <div className="my-10">

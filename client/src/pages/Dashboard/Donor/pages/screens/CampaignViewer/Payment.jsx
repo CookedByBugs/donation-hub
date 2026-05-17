@@ -58,9 +58,18 @@ const Payment = ({ campaign }) => {
 
       if (result.error) {
         console.log(result.error.message);
+        message.error(result.error.message);
       } else if (result.paymentIntent.status === "succeeded") {
-        console.log("Payment successful", result.paymentIntent);
-        message.success("Payment successful");
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/payment/confirm-payment`,
+          { paymentIntentId: result.paymentIntent.id },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          },
+        );
+        message.success("Payment successful! Thank you for your donation.");
       }
     } catch (error) {
       console.error(error.message);
@@ -71,14 +80,23 @@ const Payment = ({ campaign }) => {
 
   return (
     <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6 md:p-8 flex flex-col gap-6">
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5"
-      >
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <h2 className="text-gray-800 font-bold md:text-2xl text-xl flex items-center gap-3">
             <span className="bg-primary/10 text-primary p-2 rounded-xl  h-10 w-10 flex items-center justify-center">
-               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+              </svg>
             </span>
             <span>Make a Donation</span>
           </h2>
@@ -89,7 +107,12 @@ const Payment = ({ campaign }) => {
 
         <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="holder" className="text-sm font-semibold text-gray-700">Card Holder Name</label>
+            <label
+              htmlFor="holder"
+              className="text-sm font-semibold text-gray-700"
+            >
+              Card Holder Name
+            </label>
             <input
               name="holder"
               id="holder"
@@ -101,7 +124,12 @@ const Payment = ({ campaign }) => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-semibold text-gray-700">Email</label>
+            <label
+              htmlFor="email"
+              className="text-sm font-semibold text-gray-700"
+            >
+              Email
+            </label>
             <input
               name="email"
               id="email"
@@ -115,7 +143,12 @@ const Payment = ({ campaign }) => {
         </div>
 
         <div className="flex flex-col gap-1.5 pt-2">
-          <label htmlFor="amount" className="text-sm font-semibold text-gray-700">Donation Amount ($)</label>
+          <label
+            htmlFor="amount"
+            className="text-sm font-semibold text-gray-700"
+          >
+            Donation Amount ($)
+          </label>
           <input
             name="amount"
             id="amount"
@@ -129,22 +162,26 @@ const Payment = ({ campaign }) => {
         </div>
 
         <div className="flex flex-col gap-1.5 pt-2">
-          <label className="text-sm font-semibold text-gray-700">Card Details</label>
+          <label className="text-sm font-semibold text-gray-700">
+            Card Details
+          </label>
           <div className="p-4 border border-gray-200 rounded-xl bg-gray-50 transition-all focus-within:bg-white focus-within:border-primary/50">
-            <CardElement options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#1f2937',
-                  '::placeholder': {
-                    color: '#9ca3af',
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#1f2937",
+                    "::placeholder": {
+                      color: "#9ca3af",
+                    },
+                  },
+                  invalid: {
+                    color: "#ef4444",
                   },
                 },
-                invalid: {
-                  color: '#ef4444',
-                },
-              },
-            }}/>
+              }}
+            />
           </div>
         </div>
 
@@ -165,10 +202,24 @@ const Payment = ({ campaign }) => {
 
       <div className="p-4 bg-sky-50 border border-sky-100 rounded-2xl flex gap-3">
         <div className="text-sky-500 flex items-start justify-center">
-           <svg className="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          <svg
+            className="w-6 h-6 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            />
+          </svg>
         </div>
         <div>
-          <p className="font-semibold text-sky-800 text-sm mb-1">Secure & Trusted</p>
+          <p className="font-semibold text-sky-800 text-sm mb-1">
+            Secure & Trusted
+          </p>
           <p className="text-xs text-sky-700/80 font-medium leading-relaxed">
             Your donation is secure and will be used exclusively for this
             campaign. All transactions are encrypted.
