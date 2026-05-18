@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Stats from "./Stats";
 import LatestDonations from "./LatestDonations";
 import TopCampaigns from "./TopCampaigns";
-
-import pusher from "@/components/pusherClient";
+import socket from "@/components/socket";
 
 const Dashboard = () => {
   const [refresh, setRefresh] = useState(0);
@@ -11,17 +10,14 @@ const Dashboard = () => {
   useEffect(() => {
     document.title = "Dashboard | Donation Hub";
 
-    const channel = pusher.subscribe("campaigns");
-
     const handleRefresh = () => setRefresh((prev) => prev + 1);
 
-    channel.bind("donation_received", handleRefresh);
-    channel.bind("campaign_completed", handleRefresh);
+    socket.on("donation_received", handleRefresh);
+    socket.on("campaign_completed", handleRefresh);
 
     return () => {
-      channel.unbind("donation_received", handleRefresh);
-      channel.unbind("campaign_completed", handleRefresh);
-      pusher.unsubscribe("campaigns");
+      socket.off("donation_received", handleRefresh);
+      socket.off("campaign_completed", handleRefresh);
     };
   }, []);
 

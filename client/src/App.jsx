@@ -3,7 +3,7 @@ import "./App.css";
 import Routes from "./pages/Routes";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import pusher from "./components/pusherClient";
+import socket from "./components/socket";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ConfigProvider } from "antd";
 
@@ -14,26 +14,16 @@ const App = () => {
     delay: 100,
     // easing: "ease-in-sine",
   });
-
   useEffect(() => {
-    const handleStateChange = (states) => {
-      console.log("Pusher state:", states.current);
-    };
-
-    pusher.connection.bind("state_change", handleStateChange);
-
-    pusher.connection.bind("connected", () => {
-      console.log("Pusher connected");
+    socket.on("connect", () => {
+      console.log("Socket Connected: ", socket.id);
     });
-
-    pusher.connection.bind("disconnected", () => {
-      console.log("Pusher disconnected");
+    socket.on("disconnect", () => {
+      console.log("Socket Disconnected");
     });
-
     return () => {
-      pusher.connection.unbind("state_change", handleStateChange);
-      pusher.connection.unbind("connected");
-      pusher.connection.unbind("disconnected");
+      socket.off("connect");
+      socket.off("disconnect");
     };
   }, []);
   return (
