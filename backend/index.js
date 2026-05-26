@@ -4,7 +4,11 @@ const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./db/db");
 const api = require("./api/api");
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://donaroid.vercel.app",
+  }),
+);
 app.use(express.json());
 
 connectDB();
