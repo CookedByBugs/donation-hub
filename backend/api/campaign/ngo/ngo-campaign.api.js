@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const verifyToken = require("../../../middlewares/verifyToken");
 const ngoCampaignRouter = express.Router();
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: multer.memoryStorage() });
 
 const createController = require("../../../controllers/campaign/ngo/create-campaign.controller");
 const getCampaigns = require("../../../controllers/campaign/ngo/getCampaigns.campaign.controller");
