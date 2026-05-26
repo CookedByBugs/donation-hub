@@ -6,7 +6,7 @@ import { Col, Row } from "antd";
 import Payment from "./Payment";
 import Info from "./Info";
 import Description from "./Description";
-import socket from "@/components/socket";
+// import socket from "@/components/socket";
 
 const CampaignViewer = () => {
   document.title = "Campaign Details | Donation Hub";
@@ -35,27 +35,27 @@ const CampaignViewer = () => {
     fetchCampaign();
   }, [id]);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Socket connected", socket.id);
-    });
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     console.log("Socket connected", socket.id);
+  //   });
 
-    socket.on("donation_received", (data) => {
-      console.log("Donation received", data);
-      fetchCampaign();
-    });
-    socket.on("campaign_completed", (data) => {
-      if (data === campaign._id) {
-        fetchCampaign();
-      }
-    });
+  //   socket.on("donation_received", (data) => {
+  //     console.log("Donation received", data);
+  //     fetchCampaign();
+  //   });
+  //   socket.on("campaign_completed", (data) => {
+  //     if (data === campaign._id) {
+  //       fetchCampaign();
+  //     }
+  //   });
 
-    return () => {
-      socket.off("connect");
-      socket.off("donation_received");
-      socket.off("campaign_completed");
-    };
-  }, [fetchCampaign]);
+  //   return () => {
+  //     socket.off("connect");
+  //     socket.off("donation_received");
+  //     socket.off("campaign_completed");
+  //   };
+  // }, [fetchCampaign]);
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20 pt-28">
       <div className="my-10">

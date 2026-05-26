@@ -5,7 +5,7 @@ import Carousel from "./Carousel";
 import { Col, Row } from "antd";
 import Info from "./Info";
 import Description from "./Description";
-import socket from "@/components/socket";
+// import socket from "@/components/socket";
 
 const CampaignViewer = () => {
   const [campaign, setCampaign] = useState({});
@@ -34,27 +34,27 @@ const CampaignViewer = () => {
     document.title = "Campaign Stats | Donation Hub";
   }, [id]);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Socket connected", socket.id);
-    });
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     console.log("Socket connected", socket.id);
+  //   });
 
-    socket.on("donation_received", (data) => {
-      console.log("Donation received", data);
-      fetchCampaign();
-    });
-    socket.on("campaign_completed", (data) => {
-      if (data === campaign._id) {
-        fetchCampaign();
-      }
-    });
+  //   socket.on("donation_received", (data) => {
+  //     console.log("Donation received", data);
+  //     fetchCampaign();
+  //   });
+  //   socket.on("campaign_completed", (data) => {
+  //     if (data === campaign._id) {
+  //       fetchCampaign();
+  //     }
+  //   });
 
-    return () => {
-      socket.off("connect");
-      socket.off("donation_received");
-      socket.off("campaign_completed");
-    };
-  }, [fetchCampaign]);
+  //   return () => {
+  //     socket.off("connect");
+  //     socket.off("donation_received");
+  //     socket.off("campaign_completed");
+  //   };
+  // }, [fetchCampaign]);
 
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20 pt-28">
@@ -70,7 +70,14 @@ const CampaignViewer = () => {
       </div>
       <div className="max-w-[95%] md:max-w-[85%] mx-auto">
         <Row gutter={[24, 24]}>
-          <Col xl={14} lg={14} md={24} sm={24} xs={24} className="flex flex-col gap-6">
+          <Col
+            xl={14}
+            lg={14}
+            md={24}
+            sm={24}
+            xs={24}
+            className="flex flex-col gap-6"
+          >
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 bg-white">
               <Carousel images={images} />
             </div>
