@@ -4,11 +4,16 @@ const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./db/db");
 const api = require("./api/api");
-app.use(
-  cors({
-    origin: "https://donaroid.vercel.app",
-  }),
-);
+
+const corsOptions = {
+  origin: "https://donaroid.vercel.app", // your frontend domain
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // explicit preflight handling
 app.use(express.json());
 
 connectDB();
